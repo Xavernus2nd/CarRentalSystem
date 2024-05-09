@@ -26,7 +26,6 @@ public class Booking {
     private double paymentTotal;
     private String status;
     private String username;
-    private String username1;
     
     public Booking(int bookingID, int carID, String bStartDate, String bEndDate, int cardNumber, double paymentTotal, String status) {
         this.bookingID = bookingID;
