@@ -228,8 +228,12 @@ class Admin extends User{
 }
 
 class Customer extends User{
+    private int points;
     public Customer(String username, String password){
         super(username, password);
         this.userType = "customer";
+    }
+    public void addPoints(int add){
+        this.points += add;
     }
 }
