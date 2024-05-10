@@ -58,7 +58,7 @@ public class adminAddCar extends javax.swing.JFrame {
 
         jLabel4.setText("Car Type:");
 
-        jLabel5.setText("Car Rate (per Hour):");
+        jLabel5.setText("Car Rate (per Day):");
 
         tfName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

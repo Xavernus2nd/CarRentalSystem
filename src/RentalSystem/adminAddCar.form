@@ -133,7 +133,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Car Rate (per Hour):"/>
+        <Property name="text" type="java.lang.String" value="Car Rate (per Day):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfName">

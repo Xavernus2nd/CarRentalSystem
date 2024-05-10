@@ -75,7 +75,7 @@ public class adminManageCar extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tManageCar.getModel();
         model.setRowCount(0);
         model.setColumnCount(0); //to clear previous table model
-        String[] columnHeaders = {"CarID", "Car Name", "Car Type", "Car Rate (per Hour)", "Deletion Status", "Availability"};
+        String[] columnHeaders = {"CarID", "Car Name", "Car Type", "Car Rate (per Day)", "Deletion Status", "Availability"};
         model.setColumnIdentifiers(columnHeaders);
         try {
         BufferedReader carBr = new BufferedReader(new FileReader("car.txt"));
