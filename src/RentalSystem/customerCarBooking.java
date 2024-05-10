@@ -363,6 +363,8 @@ public class customerCarBooking extends javax.swing.JFrame {
                     int carID = Integer.parseInt(cbCar.getSelectedItem().toString());
                     //creating booking object to check booking eligibility and execute appropriate action
                     Booking booking = new Booking(carID, startDate, endDate);
+                    double total = booking.calculatePaymentTotal();
+                    booking.setPaymentTotal(total);
                     String validity = booking.checkBooking();
                     switch (validity) {
                         case "invalidS":

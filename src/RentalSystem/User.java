@@ -235,5 +235,81 @@ class Customer extends User{
     }
     public void addPoints(int add){
         this.points += add;
+        try{
+            //Writing to file
+            BufferedReader br = new BufferedReader(new FileReader("user.txt"));
+            StringBuffer buffer = new StringBuffer();
+            String line;
+            while ((line = br.readLine()) != null){
+                String record[] = line.split(",");
+                String checkUsername = record[0];
+                if (checkUsername.equals(username)){
+                    line = record[0] + "," + record[1] + ","+ record[2] + ","+ record[3] + ","+ record[4] + "," + points;
+                }
+                String bufferLine = line + "\n";
+                buffer.append(bufferLine);
+            }
+            br.close();
+            BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt"));
+            bw.write(buffer.toString());
+            bw.close();   
     }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void deductPoints(int sub){
+        this.points -= sub;
+        try{
+            //Writing to file
+            BufferedReader br = new BufferedReader(new FileReader("user.txt"));
+            StringBuffer buffer = new StringBuffer();
+            String line;
+            while ((line = br.readLine()) != null){
+                String record[] = line.split(",");
+                String checkUsername = record[0];
+                if (checkUsername.equals(username)){
+                    line = record[0] + "," + record[1] + ","+ record[2] + ","+ record[3] + ","+ record[4] + "," + points;
+                }
+                String bufferLine = line + "\n";
+                buffer.append(bufferLine);
+            }
+            br.close();
+            BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt"));
+            bw.write(buffer.toString());
+            bw.close();   
+    }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void setPoints(){
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("user.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split(",");
+                if (username.equals(record[0])) {
+                    this.points = Integer.parseInt(record[5]);
+                }
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public int getPoints(){
+        return points;
+    }
+    
+    public int calculateEarnablePoints(double payment){
+        int earnablePoints = (int) Math.round(payment*0.05);
+        return earnablePoints;
+    }
+    
 }

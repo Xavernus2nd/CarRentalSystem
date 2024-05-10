@@ -203,7 +203,7 @@ public class Booking {
             e.printStackTrace();
         }
         //Writing to file
-        String newLine = lastID + "," + carID + "," + bStartDate + "," + bEndDate + ",,,PROCESSING PAYMENT,"+username;
+        String newLine = lastID + "," + carID + "," + bStartDate + "," + bEndDate + "," + paymentTotal +",,PROCESSING PAYMENT,"+username;
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter("booking.txt", true));
             bw.write(newLine + "\n");
