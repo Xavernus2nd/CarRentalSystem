@@ -96,6 +96,7 @@ public class adminManageBooking extends javax.swing.JFrame {
 
             }
         ));
+        tBooking.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tBooking);
 
         jLabel3.setText("Booking ID:");
@@ -428,13 +429,18 @@ public class adminManageBooking extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Booking marked as completed.");
             }
         } else if (bCancelled.isSelected()){
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure to proceed refund?");
+            int confirm = JOptionPane.showConfirmDialog(null, "Do you want to approve cancellation and proceed refund?");
             if (confirm == JOptionPane.YES_OPTION){
                 int currentBookID = Integer.parseInt(sBookID.getText());
                 Booking booking = new Booking(currentBookID);
                 booking.updateStatus(currentBookID);
-                JOptionPane.showMessageDialog(rootPane, "Refund successfully.");
-            }
+                JOptionPane.showMessageDialog(rootPane, "Cancellation approved and refund successfully.");
+            } else if (confirm == JOptionPane.NO_OPTION){
+                int currentBookID = Integer.parseInt(sBookID.getText());
+                Booking booking = new Booking(currentBookID);
+                booking.updateStatus(currentBookID);
+                JOptionPane.showMessageDialog(rootPane, "Cancellation request denied.");
+            } 
         }
         populateTable(); //refresh table
     }//GEN-LAST:event_bActionActionPerformed
