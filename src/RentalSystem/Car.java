@@ -113,7 +113,7 @@ public class Car {
                 }
                 //checks for validity of date for records of specified carID
                 else if((record[1].equals(String.valueOf(carID))) && (currentDate.compareTo(record[3]))<=0 && (currentDate.compareTo(record[2]))>=0){
-                    if(record[7].equals("CANCELLED")){
+                    if(record[6].equals("CANCELLED")){
                         avail = "Available";
                         break;
                     }
