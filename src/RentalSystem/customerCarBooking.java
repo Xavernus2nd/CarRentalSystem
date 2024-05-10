@@ -375,7 +375,9 @@ public class customerCarBooking extends javax.swing.JFrame {
                             break;
                         default:
                             booking.initialBooking();
-                            //insert next page here
+                            dispose();
+                            customerPayment frame = new customerPayment();
+                            frame.setVisible(true);
                             break;
                     }
                 }
