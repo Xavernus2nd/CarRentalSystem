@@ -67,13 +67,6 @@ public class Registration extends javax.swing.JFrame {
 
         jLabel7.setText("Confirm Password:");
 
-        tfPassword.setText("5 - 8 Character");
-        tfPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPasswordActionPerformed(evt);
-            }
-        });
-
         tfConPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfConPasswordKeyPressed(evt);
@@ -178,18 +171,12 @@ public class Registration extends javax.swing.JFrame {
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             registerActionPerformed(new java.awt.event.ActionEvent(this, java.awt.event.ActionEvent.ACTION_PERFORMED, ""));
         }
-    }                                        
-
-    private void tfPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
+    }                                              
 
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {                                       
         //to open the login window
         userLogin loginWindow = new userLogin();
         loginWindow.setVisible(true);
-
-        //close the registration window
         this.dispose();
     }                                      
 
@@ -204,21 +191,21 @@ public class Registration extends javax.swing.JFrame {
         String conpassword = tfConPassword.getText().trim();
         User newUser = new User(username, password, icnum, hpnum, conpassword);
 
-        //check if the registration details are valid
-        if (newUser.validateRegistration(username, password, icnum, conpassword, hpnum)) {
-            newUser.regRegistration();
-            
-            //display a success message
-            JOptionPane.showMessageDialog(rootPane, "Registration successful.");
-            //open the login window
-            userLogin loginWindow = new userLogin();
-            loginWindow.setVisible(true);
-
-            //close the registration window
-            this.dispose();
+        //check if the passwrod is 5-8 characters
+        if (password.length() >= 5 && password.length() <= 8) {
+            // Check if the registration details are valid
+            if (newUser.validateRegistration(username, password, icnum, conpassword, hpnum)) {
+                newUser.regRegistration();
+                JOptionPane.showMessageDialog(rootPane, "Registration successful.");
+                //direct to login page
+                userLogin loginWindow = new userLogin();
+                loginWindow.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Invalid registration details. Please check again.");
+            }
         } else {
-            //display an error message if registration details are invalid
-            JOptionPane.showMessageDialog(rootPane, "Invalid registration details. Please check again.");
+            JOptionPane.showMessageDialog(rootPane, "Password must be between 5 to 8 characters.");
         }
     }
     
