@@ -4,8 +4,6 @@
  */
 package RentalSystem;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
