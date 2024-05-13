@@ -256,7 +256,7 @@ public class adminManageBooking extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel8)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(sStartDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -436,6 +436,7 @@ public class adminManageBooking extends javax.swing.JFrame {
         bConfirmed.setSelected(false);
         bCompleted.setSelected(false);
         bRefunded.setSelected(false);
+        clearBookingDetailsLabels();
         populateTable();
     }//GEN-LAST:event_bAllActionPerformed
 
@@ -448,6 +449,7 @@ public class adminManageBooking extends javax.swing.JFrame {
         bPendRefund.setSelected(false);
         bConfirmed.setSelected(false);
         bRefunded.setSelected(false);
+        clearBookingDetailsLabels();
         populateTable();
     }//GEN-LAST:event_bCompletedActionPerformed
 
@@ -460,10 +462,18 @@ public class adminManageBooking extends javax.swing.JFrame {
         bPendRefund.setSelected(false);
         bConfirmed.setSelected(false);
         bCompleted.setSelected(false);
+        clearBookingDetailsLabels();
         populateTable();
     }//GEN-LAST:event_bRefundedActionPerformed
 
     private void bActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActionActionPerformed
+        String bookIDText = sBookID.getText();
+    
+        if (bookIDText.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Please select a record.");
+            return; 
+        }
+        
         int currentBookID = Integer.parseInt(sBookID.getText());
         boolean approve = false;
         Booking booking = new Booking(currentBookID);
@@ -497,17 +507,17 @@ public class adminManageBooking extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Cancellation approved and refund successfully.");
                 } else if (confirm == JOptionPane.NO_OPTION) {
                     booking.updateStatus(currentBookID , approve);
-                    JOptionPane.showMessageDialog(rootPane, "Cancellation denied");
+                    JOptionPane.showMessageDialog(rootPane, "Cancellation request denied");
                 }
             } else {
                 confirm = JOptionPane.showConfirmDialog(null, "Confirm refund?");
                 if (confirm == JOptionPane.YES_OPTION){
                     approve = true;
                     booking.updateStatus(currentBookID, approve);
-                    JOptionPane.showMessageDialog(rootPane, "Cancellation request denied.");
+                    JOptionPane.showMessageDialog(rootPane, "Refund successfully. ");
                 }
             }
-        }
+        } 
         populateTable(); //refresh table
     }//GEN-LAST:event_bActionActionPerformed
 
@@ -527,6 +537,7 @@ public class adminManageBooking extends javax.swing.JFrame {
         bConfirmed.setSelected(false);
         bCompleted.setSelected(false);
         bRefunded.setSelected(false);
+        clearBookingDetailsLabels();
         populateTable();
     }//GEN-LAST:event_bPendConfirmActionPerformed
 
@@ -539,12 +550,25 @@ public class adminManageBooking extends javax.swing.JFrame {
         bPendConfirm.setSelected(false);
         bCompleted.setSelected(false);
         bRefunded.setSelected(false);
+        clearBookingDetailsLabels();
         populateTable();
     }//GEN-LAST:event_bConfirmedActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    private void clearBookingDetailsLabels() {
+        sBookID.setText("");
+        sUsername.setText("");
+        sCarName.setText("");
+        sCarType.setText("");
+        sStartDate.setText("");
+        sEndDate.setText("");
+        sPayAmount.setText("");
+        sBookingStatus.setText("");
+        lreason.setText("");
+    }
+    
     private void initSearch() {
         sorter = new TableRowSorter<>(tBooking.getModel());
         tBooking.setRowSorter(sorter);
