@@ -374,12 +374,12 @@ public class Booking {
                         bookingData[6] = "COMPLETED";
                     } else if ("CANCELLED".equals(currentStatus)&& approve){
                         //mark refunded
-                        bookingData[5] = String.valueOf(paymentTotal * 0.2);
+                        bookingData[5] = String.valueOf(paymentTotal * 0.8);
                         bookingData[6] = "REFUNDED";
                     } else if ("PENDING CANCEL".equals(currentStatus)){
                         if (approve){
                             //update status
-                            bookingData[5] = String.valueOf(paymentTotal * 0.2);
+                            bookingData[5] = String.valueOf(paymentTotal * 0.8);
                             bookingData[6] = "REFUNDED";
                         } else {
                             //update status
