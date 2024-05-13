@@ -232,6 +232,19 @@ class Customer extends User{
     public Customer(String username, String password){
         super(username, password);
         this.userType = "customer";
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("user.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] record = line.split(",");
+                if (username.equals(record[0])) {
+                    this.points = Integer.parseInt(record[5]);
+                }
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
     public void addPoints(int add){
         this.points += add;
@@ -285,22 +298,6 @@ class Customer extends User{
             e.printStackTrace();
         }
 
-    }
-    
-    public void setPoints(){
-        try{
-            BufferedReader br = new BufferedReader(new FileReader("user.txt"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] record = line.split(",");
-                if (username.equals(record[0])) {
-                    this.points = Integer.parseInt(record[5]);
-                }
-            }
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
     }
     
     public int getPoints(){
