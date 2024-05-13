@@ -467,9 +467,10 @@ public class customerPayment extends javax.swing.JFrame {
                             return;
                         }
 
-                        // Deduct points (Not implemented, replace this with your actual deduction logic)
-                        // customer.deductPoints(redeemPoints);
                         double newPaymentTotal = paymentTotal - redeemPoints; 
+                        
+                        Customer customer = new Customer(UserSession.getUsername(), "");
+                        customer.deductPoints(redeemPoints);
 
                         Booking booking = new Booking(bookingID, carID, startDate, endDate);
                         booking.writeBookingDetails(cardNum, newPaymentTotal, bookingID); 
