@@ -209,14 +209,14 @@ public class adminReport extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         model.setRowCount(0);
         model.setColumnCount(0);
-        //header
+        // Header
         model.addColumn("Month");
         model.addColumn("Total Sales");
         model.addColumn("Total Refunded Amount");
 
         String selectedYear = cbSalesYear.getSelectedItem().toString();
 
-        //HashMap to store month-wise sales and refund amounts
+        // HashMap to store month-wise sales and refund amounts
         HashMap<String, Double> salesByMonth = new HashMap<>();
         HashMap<String, Double> refundByMonth = new HashMap<>();
 
@@ -228,43 +228,41 @@ public class adminReport extends javax.swing.JFrame {
                 if (rStatus.equals("COMPLETED") || rStatus.equals("REFUNDED")) {
                     String rStartDate = record[2];
                     String[] startDateParts = rStartDate.split("-");
-                    String monthKey = startDateParts[1] + "-" + startDateParts[0]; 
+                    String monthKey = startDateParts[1] + "-" + startDateParts[0];
 
-                    //check if the booking is in the selected year
+                    // Check if the booking is in the selected year
                     if (startDateParts[0].equals(selectedYear)) {
                         double rPayAmount = Double.parseDouble(record[5]);
-                        double rRefundAmount;
-                        if (rStatus.equals("REFUNDED")) {
-                            rRefundAmount = rPayAmount * 0.25;
-                        } else {
-                            rRefundAmount = 0;
-                        }
+                        double rRefundAmount = 0;
 
-                        //update sales and refund amounts for the month
-                        salesByMonth.put(monthKey, salesByMonth.getOrDefault(monthKey, 0.00) + rPayAmount);
-                        refundByMonth.put(monthKey, refundByMonth.getOrDefault(monthKey, 0.00) + rRefundAmount);
+                        // Update sales and refund amounts for the month
+                        if (rStatus.equals("COMPLETED")) {
+                            salesByMonth.put(monthKey, salesByMonth.getOrDefault(monthKey, 0.00) + rPayAmount);
+                        } else if (rStatus.equals("REFUNDED")) {
+                            rRefundAmount = rPayAmount * 0.25;
+                            refundByMonth.put(monthKey, refundByMonth.getOrDefault(monthKey, 0.00) + rRefundAmount);
+                        }
                     }
                 }
             }
-            
+
             String[] monthNames = {"", "January", "February", "March", "April", "May", "June", "July", 
                                    "August", "September", "October", "November", "December"};
 
-            //iterate over the HashMap and add month-wise totals to the model
+            // Iterate over the HashMap and add month-wise totals to the model
             for (int i = 1; i <= 12; i++) {
                 String monthName = monthNames[i];
                 String monthKey = String.format("%02d", i) + "-" + selectedYear; // Adjusted month-year format
 
-                if (salesByMonth.containsKey(monthKey) && refundByMonth.containsKey(monthKey)) {
+                if (salesByMonth.containsKey(monthKey)) {
                     double totalSales = salesByMonth.get(monthKey);
-                    double totalRefund = refundByMonth.get(monthKey);
+                    double totalRefund = refundByMonth.getOrDefault(monthKey, 0.00);
                     model.addRow(new Object[]{monthName, "RM" + totalSales, "RM" + totalRefund});
                 } else {
-                    //if no records for month
+                    // If no records for month
                     model.addRow(new Object[]{monthName, "RM -", "RM -"});
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
