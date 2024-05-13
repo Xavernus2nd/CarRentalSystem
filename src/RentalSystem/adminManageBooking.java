@@ -468,7 +468,6 @@ public class adminManageBooking extends javax.swing.JFrame {
         boolean approve = false;
         Booking booking = new Booking(currentBookID);
         Customer customer = new Customer(sUsername.getText(), "");
-        customer.setPoints();
         if (bPendConfirm.isSelected()){ //to confirm booking
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to mark as confirmed?");
             if (confirm == JOptionPane.YES_OPTION){
@@ -479,7 +478,9 @@ public class adminManageBooking extends javax.swing.JFrame {
         } else if (bPendReturn.isSelected()){ //to mark as completed (after customer return car)
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to mark as complete?");
             if (confirm == JOptionPane.YES_OPTION){
-                double payment = Double.parseDouble(sPayAmount.getText());
+                String paymentString = sPayAmount.getText();
+                String amountString = paymentString.substring(2); //remove RM
+                double payment = Double.parseDouble(amountString);
                 int earnPoints = customer.calculateEarnablePoints(payment);
                 customer.addPoints(earnPoints);
                 approve = true;
