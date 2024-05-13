@@ -519,8 +519,7 @@ public class customerPayment extends javax.swing.JFrame {
                 String startDate = tokens[2];
                 String endDate = tokens[3];
                 double paymentTotal = Double.parseDouble(tokens[5]);
-                Customer customer = new Customer(UserSession.getUsername(), "");
-                customer.setPoints();
+                Customer customer = new Customer(UserSession.getUsername());
                 int pointBalance = customer.getPoints();
                 int earnablePoints = customer.calculateEarnablePoints(paymentTotal);
                 displayCarDetails(carID);
