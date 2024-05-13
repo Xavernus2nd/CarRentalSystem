@@ -515,7 +515,7 @@ public class customerPayment extends javax.swing.JFrame {
                 String[] tokens = line.split(",");
                 //extract the relevant parameters
                 int bookingID = Integer.parseInt(tokens[0]);
-                int carID = Integer.parseInt(tokens[1]);
+                String carID = tokens[1];
                 String startDate = tokens[2];
                 String endDate = tokens[3];
                 double paymentTotal = Double.parseDouble(tokens[5]);
@@ -537,40 +537,19 @@ public class customerPayment extends javax.swing.JFrame {
     }
     
     //displaying car details for the selected car
-    private void displayCarDetails(int carID) {
-        try (BufferedReader br = new BufferedReader(new FileReader("car.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] tokens = line.split(",");
-                int currentCarID = Integer.parseInt(tokens[0]);
-                if (currentCarID == carID) {
-                    String carName = tokens[1];
-                    String carType = tokens[2];
-                    double carRate = Double.parseDouble(tokens[3]);
-                    // Display car details
-                    sCarName.setText(carName);
-                    sCarType.setText(carType);
-                    sCarRate.setText(String.valueOf(carRate));
-                    break; // Stop reading after finding the car details
-                }
-            }
+    private void displayCarDetails(String carID) {
+        try {
+            Car car = new Car();
+            String[] carDetails = car.getCarDetails(carID);
+
+            //display car details
+            sCarName.setText(carDetails[0]);
+            sCarType.setText(carDetails[1]);
+            sCarRate.setText(carDetails[2]);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    private String[] getCarDetails(String carID) throws IOException {
-            try (BufferedReader reader = new BufferedReader(new FileReader("car.txt"))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(",");
-                    if (parts[0].equals(carID)) {
-                        return new String[]{parts[1], parts[2]}; //car name and type
-                    }
-                }
-            }
-            return new String[]{"", ""}; //default if car ID is not found
-        }
     
     //display month and year in drop down
     public void displayYear(){
