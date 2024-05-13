@@ -7,9 +7,14 @@ package RentalSystem;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -57,6 +62,8 @@ import javax.swing.table.DefaultTableModel;
 
         private void populateTable() {
             DefaultTableModel model = new DefaultTableModel();
+            model.setRowCount(0);
+            model.setColumnCount(0);
             //header
             model.addColumn("Booking ID");
             model.addColumn("Car Name");
@@ -137,6 +144,11 @@ import javax.swing.table.DefaultTableModel;
         tfPayAmount = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         tfBookingStatus = new javax.swing.JTextField();
+        lreason = new javax.swing.JLabel();
+        taScrollPane = new javax.swing.JScrollPane();
+        taReason = new javax.swing.JTextArea();
+        tfSearch = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,6 +181,11 @@ import javax.swing.table.DefaultTableModel;
         jLabel8.setText("End Date:");
 
         bCancelBook.setText("Cancel Booking");
+        bCancelBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCancelBookActionPerformed(evt);
+            }
+        });
 
         bBack.setText("Back");
         bBack.addActionListener(new java.awt.event.ActionListener() {
@@ -181,16 +198,42 @@ import javax.swing.table.DefaultTableModel;
 
         jLabel10.setText("Booking Status:");
 
+        lreason.setText("Please fill in the reason if you wish to cancel:");
+
+        taReason.setColumns(20);
+        taReason.setRows(5);
+        taScrollPane.setViewportView(taReason);
+
+        tfSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSearchActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Search Booking ID:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 172, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel2)))
+                .addGap(168, 168, 168))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(bCancelBook)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -203,11 +246,10 @@ import javax.swing.table.DefaultTableModel;
                                 .addComponent(jLabel10))
                             .addGap(7, 7, 7)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfBookingStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfBookID, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                                    .addComponent(tfCarType)
-                                    .addComponent(tfCarName)))
+                                .addComponent(tfBookingStatus)
+                                .addComponent(tfBookID)
+                                .addComponent(tfCarType)
+                                .addComponent(tfCarName, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -221,16 +263,10 @@ import javax.swing.table.DefaultTableModel;
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel9)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(tfPayAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(38, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel2)))
-                .addGap(168, 168, 168))
+                                    .addComponent(tfPayAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(lreason, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(taScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,6 +276,10 @@ import javax.swing.table.DefaultTableModel;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
@@ -271,11 +311,15 @@ import javax.swing.table.DefaultTableModel;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(tfBookingStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lreason)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(taScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bCancelBook)
                     .addComponent(bBack))
-                .addGap(15, 15, 15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -286,6 +330,42 @@ import javax.swing.table.DefaultTableModel;
         customerMain frame = new customerMain();
         frame.setVisible(true);
     }//GEN-LAST:event_bBackActionPerformed
+
+    private void bCancelBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelBookActionPerformed
+        String bookingStatus = tfBookingStatus.getText();
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to cancel booking?");
+        if (!bookingStatus.equals("COMPLETED") && !bookingStatus.equals("CANCELLED")){
+            if (confirm == JOptionPane.YES_OPTION){
+                int currentBookID = Integer.parseInt(tfBookID.getText());
+                String reason = taReason.getText();
+                Booking booking = new Booking(currentBookID, reason);
+                boolean reasonProvided = !reason.isEmpty();
+
+                if (!booking.isCancellationAllowed()) {
+                    if (!reasonProvided) {
+                        JOptionPane.showMessageDialog(rootPane, "The booking selected is within 48 hours before the start date. Please fill in the cancel reason and wait for approval from admin.");
+                        return; 
+                    } else {
+                        booking.cancelBooking();
+                        JOptionPane.showMessageDialog(rootPane, "Booking cancellation request sent to admin for approval.");
+                    }
+                } else {
+                    booking.cancelBooking();
+                    JOptionPane.showMessageDialog(rootPane, "Booking cancelled successfully.");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "You are not allowed to cancel the booking.");
+        }
+        populateTable(); //refresh table
+    }//GEN-LAST:event_bCancelBookActionPerformed
+
+    private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
+        DefaultTableModel obj = (DefaultTableModel) tBooking.getModel();
+        TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
+        tBooking.setRowSorter(obj1);
+        obj1.setRowFilter(RowFilter.regexFilter("(?i)" + Pattern.quote(tfSearch.getText()), 0)); // Search in Booking ID
+    }//GEN-LAST:event_tfSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,6 +407,7 @@ import javax.swing.table.DefaultTableModel;
     private javax.swing.JButton bCancelBook;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -336,13 +417,17 @@ import javax.swing.table.DefaultTableModel;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lreason;
     private javax.swing.JTable tBooking;
+    private javax.swing.JTextArea taReason;
+    private javax.swing.JScrollPane taScrollPane;
     private javax.swing.JTextField tfBookID;
     private javax.swing.JTextField tfBookingStatus;
     private javax.swing.JTextField tfCarName;
     private javax.swing.JTextField tfCarType;
     private javax.swing.JTextField tfEndDate;
     private javax.swing.JTextField tfPayAmount;
+    private javax.swing.JTextField tfSearch;
     private javax.swing.JTextField tfStartDate;
     // End of variables declaration//GEN-END:variables
 }
