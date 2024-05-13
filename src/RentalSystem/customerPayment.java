@@ -147,7 +147,7 @@ public class customerPayment extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Payment Details:");
 
-        jLabel16.setText("👍Free cancellation 48 hours before pick-up; 20% fee thereafter.");
+        jLabel16.setText("👍Free cancellation 48 hours before pick-up, 20% fee thereafter.");
 
         bPay.setText("Pay");
         bPay.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +185,7 @@ public class customerPayment extends javax.swing.JFrame {
 
         jLabel20.setText("❗ Any cancellation request within 48 hours before pick-up");
 
-        jLabel21.setText("need to wait for admin's approval.");
+        jLabel21.setText("will be subject to admin's approval.");
 
         jLabel22.setText("Redeem Points:");
 
@@ -194,7 +194,7 @@ public class customerPayment extends javax.swing.JFrame {
         sPointBalance.setText("Balance");
 
         jLabel23.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel23.setText("❗Kindly note that redeeming points precludes further accumulation.");
+        jLabel23.setText("❗Kindly note redeemed points are strictly non-refundable.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

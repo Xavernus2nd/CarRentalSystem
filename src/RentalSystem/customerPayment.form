@@ -381,7 +381,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
       <Properties>
-        <Property name="text" type="java.lang.String" value="\ud83d\udc4dFree cancellation 48 hours before pick-up; 20% fee thereafter." containsInvalidXMLChars="true"/>
+        <Property name="text" type="java.lang.String" value="\ud83d\udc4dFree cancellation 48 hours before pick-up, 20% fee thereafter." containsInvalidXMLChars="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="bPay">
@@ -457,7 +457,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel21">
       <Properties>
-        <Property name="text" type="java.lang.String" value="need to wait for admin&apos;s approval."/>
+        <Property name="text" type="java.lang.String" value="will be subject to admin&apos;s approval."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel22">
@@ -482,7 +482,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x2757;Kindly note that redeeming points precludes further accumulation."/>
+        <Property name="text" type="java.lang.String" value="&#x2757;Kindly note redeemed points are strictly non-refundable."/>
       </Properties>
     </Component>
   </SubComponents>
