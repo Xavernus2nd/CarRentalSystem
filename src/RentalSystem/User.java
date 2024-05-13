@@ -211,7 +211,7 @@ public class User {
     }
     
     public void regRegistration() {
-        String record = username + "," + password + "," + icnum + "," + hpnum + ",customer";
+        String record = username + "," + password + "," + icnum + "," + hpnum + ",customer,0";
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt", true))) {
             bw.write("\n" + record);
         } catch (IOException e) {
