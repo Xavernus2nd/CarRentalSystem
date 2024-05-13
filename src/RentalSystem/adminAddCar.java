@@ -169,7 +169,7 @@ public class adminAddCar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
-        adminMain frame = new adminMain();
+        adminManageCar frame = new adminManageCar();
         frame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

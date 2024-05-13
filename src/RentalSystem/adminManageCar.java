@@ -54,7 +54,7 @@ public class adminManageCar extends javax.swing.JFrame {
                             cbCarType.setSelectedIndex(3);
                             break;
                     }
-                    tfManageCarRate.setText(tManageCar.getValueAt(selectedRow, 3).toString());
+                    tfManageCarRate.setText(tManageCar.getValueAt(selectedRow, 3).toString().substring(2));
                     String deletionCheck = tManageCar.getValueAt(selectedRow, 4).toString();
                     //setting deletion combo box
                     if(deletionCheck.equals("Deleted")){
@@ -85,7 +85,7 @@ public class adminManageCar extends javax.swing.JFrame {
             String rCarID = record[0];
             String rCarName = record[1];
             String rCarType = record[2];
-            String rCarRate = record[3];
+            String rCarRate = "RM"+record[3];
             String rDeletion = record[4];
             Car car = new Car();
             car.setCarID(Integer.parseInt(record[0]));
@@ -397,12 +397,8 @@ public class adminManageCar extends javax.swing.JFrame {
             //creating car object and calling edit method
             Car car = new Car(Integer.parseInt(eCarID), eCarName, eCarType, eCarRate, eCarDeletion);
             car.editCar();
-            //Setting values of changed row
-            tManageCar.setValueAt(tfManageCarName.getText(), Integer.parseInt(eCarID)-1, 1);
-            tManageCar.setValueAt(cbCarType.getSelectedItem().toString(), Integer.parseInt(eCarID)-1, 2);
-            tManageCar.setValueAt(tfManageCarRate.getText(), Integer.parseInt(eCarID)-1, 3);
-            tManageCar.setValueAt(cbDeletion.getSelectedItem().toString(), Integer.parseInt(eCarID)-1, 4);
-            tManageCar.setValueAt(car.checkAvail(), Integer.parseInt(eCarID)-1, 5);
+            //Populating the table with new values again
+            populateTable();
         }
         catch (NumberFormatException e){
             JOptionPane.showMessageDialog(rootPane, "Please enter valid car information.");
