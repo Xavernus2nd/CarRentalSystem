@@ -308,5 +308,4 @@ class Customer extends User{
         int earnablePoints = (int) Math.round(payment*0.05);
         return earnablePoints;
     }
-    
 }
