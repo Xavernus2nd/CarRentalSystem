@@ -30,6 +30,7 @@ public class adminMain extends javax.swing.JFrame {
         bAddCar = new javax.swing.JButton();
         bExit = new javax.swing.JButton();
         bManageCar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +59,13 @@ public class adminMain extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Manage Booking");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,8 +80,9 @@ public class adminMain extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(bAddCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bManageCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(159, Short.MAX_VALUE))
+                            .addComponent(bManageCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,8 +94,10 @@ public class adminMain extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(bManageCar)
                 .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(26, 26, 26)
                 .addComponent(bExit)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,6 +122,12 @@ public class adminMain extends javax.swing.JFrame {
         adminManageCar frame = new adminManageCar();
         frame.setVisible(true);
     }//GEN-LAST:event_bManageCarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+        adminManageBooking frame = new adminManageBooking();
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,6 +168,7 @@ public class adminMain extends javax.swing.JFrame {
     private javax.swing.JButton bAddCar;
     private javax.swing.JButton bExit;
     private javax.swing.JButton bManageCar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
