@@ -26,6 +26,8 @@ public class Booking {
     private double paymentTotal;
     private String status;
     private String username;
+    private String cancelReason;
+    private boolean approve;
     
     public Booking(int bookingID, int carID, String bStartDate, String bEndDate, int cardNumber, double paymentTotal, String status) {
         this.bookingID = bookingID;
@@ -38,9 +40,14 @@ public class Booking {
         this.username = UserSession.getUsername();
     }
     
-    public Booking(int bookingID){ //for cancelBooking() & updateStatus()
+    public Booking(int bookingID){ //for isCancellationAllowed()
+        this.bookingID = bookingID;
+    }
+    
+    public Booking(int bookingID, String cancelReason){ //for cancelBooking() & updateStatus()
         this.bookingID = bookingID;
         this.username = UserSession.getUsername();
+        this.cancelReason = cancelReason;
     }
     
     public Booking(int carID, String bStartDate, String bEndDate){ //for checkBooking() and initialBooking()
@@ -120,27 +127,71 @@ public class Booking {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getCancelReason() {
+        return cancelReason;
+    }
+
+    public void setCancelReason(String cancelReason) {
+        this.cancelReason = cancelReason;
+    }
+    
+    public boolean isCancellationAllowed(){ //to check if the cancel date is 48 hours before start date
+        boolean bookingFound = false;
+    try {
+        BufferedReader br = new BufferedReader(new FileReader("booking.txt"));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String record[] = line.split(",");
+            int checkBookID = Integer.parseInt(record[0]);
+            if (checkBookID == bookingID) {
+                bookingFound = true;
+                Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(record[2]);
+                Date currentDate = new Date();
+
+                long timeDiffInMillis = startDate.getTime() - currentDate.getTime();
+                long timeDiffInDays = TimeUnit.MILLISECONDS.toDays(timeDiffInMillis);
+
+                if (timeDiffInDays >= 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        br.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return !bookingFound;
+    }
     
     public void cancelBooking(){
         try{
-            BufferedReader br = new BufferedReader(new FileReader("booking.txt"));
-            StringBuffer buffer = new StringBuffer();
+            File file = new File("booking.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            StringBuilder stringBuilder = new StringBuilder(); // Change to StringBuilder
             String line;
-            while ((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 String record[] = line.split(",");
                 int checkBookingID = Integer.parseInt(record[0]);
-                if (checkBookingID == bookingID){
-                    line = bookingID + "," + record[1] + ","+ record[2] + ","+ record[3] + "," + record[4] + "," + record[5] + ",CANCELLED"+","+username;
+                if (checkBookingID == bookingID) {
+                    if (!isCancellationAllowed()) {
+                        
+                        record[6] = "PENDING CANCEL";
+                        record[8] = cancelReason;
+                    } else {
+                        record[6] = "CANCELLED";
+                    }
+                    line = String.join(",", record);
                 }
-                String bufferLine = line + "\n";
-                buffer.append(bufferLine);
+                stringBuilder.append(line).append("\n"); 
             }
             br.close();
             BufferedWriter bw = new BufferedWriter(new FileWriter("booking.txt"));
-            bw.write(buffer.toString());
-            bw.close();   
-        }
-        catch(IOException e){
+            bw.write(stringBuilder.toString()); 
+            bw.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -176,7 +227,7 @@ public class Booking {
                         validity = "invalidE";
                         break;
                     }
-            }
+                }
             }
         }
         catch(ParseException e){
@@ -203,7 +254,7 @@ public class Booking {
             e.printStackTrace();
         }
         //Writing to file
-        String newLine = lastID + "," + carID + "," + bStartDate + "," + bEndDate + "," + paymentTotal +",,PROCESSING PAYMENT,"+username;
+        String newLine = lastID + "," + carID + "," + bStartDate + "," + bEndDate + ",," + paymentTotal +",PROCESSING PAYMENT,"+username+",null";
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter("booking.txt", true));
             bw.write(newLine + "\n");
@@ -303,7 +354,7 @@ public class Booking {
     }
     
     //for manage booking
-    public void updateStatus(int bookingID){
+    public void updateStatus(int bookingID, boolean approve){
         try {
             File file = new File("booking.txt");
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -314,14 +365,28 @@ public class Booking {
                 int bookID = Integer.parseInt(bookingData[0]);
                 String currentStatus = bookingData[6];
                 if (bookID == bookingID) {
-                    if ("PAID".equals(currentStatus)){
-                        //update status
+                    if ("PAID".equals(currentStatus) && approve){
+                        //confirm booking
+                        bookingData[6] = "CONFIRMED";
+                        line = String.join(",", bookingData);
+                    } else if ("CONFIRMED".equals(currentStatus)&& approve){
+                        //mark booking complete
                         bookingData[6] = "COMPLETED";
                         line = String.join(",", bookingData);
-                    } else if ("CANCELLED".equals(currentStatus)){
-                        //update status
+                    } else if ("CANCELLED".equals(currentStatus)&& approve){
+                        //mark refunded
                         bookingData[6] = "REFUNDED";
                         line = String.join(",", bookingData);
+                    } else if ("PENDING CANCEL".equals(currentStatus)){
+                        if (approve){
+                            //update status
+                            bookingData[6] = "REFUNDED";
+                            line = String.join(",", bookingData);
+                        } else {
+                            //update status
+                            bookingData[6] = "CONFIRMED";
+                            line = String.join(",", bookingData);
+                        }
                     }
                 }
                 stringBuilder.append(line).append("\n");
