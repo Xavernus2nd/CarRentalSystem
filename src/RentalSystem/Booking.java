@@ -364,30 +364,29 @@ public class Booking {
                 String[] bookingData = line.split(",");
                 int bookID = Integer.parseInt(bookingData[0]);
                 String currentStatus = bookingData[6];
+                double paymentTotal = Double.parseDouble(bookingData[5]);
                 if (bookID == bookingID) {
                     if ("PAID".equals(currentStatus) && approve){
                         //confirm booking
                         bookingData[6] = "CONFIRMED";
-                        line = String.join(",", bookingData);
                     } else if ("CONFIRMED".equals(currentStatus)&& approve){
                         //mark booking complete
                         bookingData[6] = "COMPLETED";
-                        line = String.join(",", bookingData);
                     } else if ("CANCELLED".equals(currentStatus)&& approve){
                         //mark refunded
+                        bookingData[5] = String.valueOf(paymentTotal * 0.2);
                         bookingData[6] = "REFUNDED";
-                        line = String.join(",", bookingData);
                     } else if ("PENDING CANCEL".equals(currentStatus)){
                         if (approve){
                             //update status
+                            bookingData[5] = String.valueOf(paymentTotal * 0.2);
                             bookingData[6] = "REFUNDED";
-                            line = String.join(",", bookingData);
                         } else {
                             //update status
                             bookingData[6] = "CONFIRMED";
-                            line = String.join(",", bookingData);
                         }
                     }
+                    line = String.join(",", bookingData);
                 }
                 stringBuilder.append(line).append("\n");
             }
@@ -398,5 +397,10 @@ public class Booking {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public double calculateNewTotal(double paymentTotal) {
+        //to get a new total after refund
+        return paymentTotal * 0.2;
     }
 }
