@@ -87,7 +87,8 @@ import javax.swing.table.TableRowSorter;
                         String rBookingStatus = record[6]; 
 
                         //get car details based on car ID
-                        String[] carDetails = getCarDetails(rCarID);
+                        Car car = new Car();
+                        String[] carDetails = car.getCarDetails(rCarID);
 
                         //add the booking details to the model
                         model.addRow(new Object[]{rBookingID, carDetails[0], carDetails[1], rStartDate, rEndDate, "RM"+rPayAmount, rBookingStatus});
@@ -99,19 +100,6 @@ import javax.swing.table.TableRowSorter;
 
             // Set the model to the table
             tBooking.setModel(model);
-        }
-
-        private String[] getCarDetails(String carID) throws IOException {
-            try (BufferedReader reader = new BufferedReader(new FileReader("car.txt"))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(",");
-                    if (parts[0].equals(carID)) {
-                        return new String[]{parts[1], parts[2]}; //car name and type
-                    }
-                }
-            }
-            return new String[]{"", ""}; //default if car ID is not found
         }
     
     /**
@@ -334,7 +322,7 @@ import javax.swing.table.TableRowSorter;
     private void bCancelBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelBookActionPerformed
         String bookingStatus = tfBookingStatus.getText();
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to cancel booking?");
-        if (!bookingStatus.equals("COMPLETED") && !bookingStatus.equals("CANCELLED")){
+        if (!bookingStatus.equals("COMPLETED") && !bookingStatus.equals("CANCELLED") && !bookingStatus.equals("PENDING CANCEL")){
             if (confirm == JOptionPane.YES_OPTION){
                 int currentBookID = Integer.parseInt(tfBookID.getText());
                 String reason = taReason.getText();
@@ -364,7 +352,7 @@ import javax.swing.table.TableRowSorter;
         DefaultTableModel obj = (DefaultTableModel) tBooking.getModel();
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
         tBooking.setRowSorter(obj1);
-        obj1.setRowFilter(RowFilter.regexFilter("(?i)" + Pattern.quote(tfSearch.getText()), 0)); // Search in Booking ID
+        obj1.setRowFilter(RowFilter.regexFilter("(?i)" + Pattern.quote(tfSearch.getText()), 0));
     }//GEN-LAST:event_tfSearchActionPerformed
 
     /**
