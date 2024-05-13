@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,16 +18,13 @@ import javax.swing.table.DefaultTableModel;
  * @author ASUS
  */
 public class adminReport extends javax.swing.JFrame {
-    private final String[] months = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-
     /**
      * Creates new form adminReport
      */
     public adminReport() {
         initComponents();
         displayYear();
-        generateRentReport();
-        generateSalesReport();
+        //displayButton();
     }
 
     /**
@@ -39,15 +39,16 @@ public class adminReport extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cbMonth = new javax.swing.JComboBox<>();
+        cbRentMonth = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         cbRentYear = new javax.swing.JComboBox<>();
         cbSalesYear = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tSales = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tMostRent = new javax.swing.JTable();
+        tRent = new javax.swing.JTable();
         bBack = new javax.swing.JButton();
+        bGenerate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,7 +61,7 @@ public class adminReport extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Sales Statistic for year:");
 
-        cbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
+        cbRentMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Most Rented Car in:");
@@ -76,7 +77,7 @@ public class adminReport extends javax.swing.JFrame {
         tSales.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tSales);
 
-        tMostRent.setModel(new javax.swing.table.DefaultTableModel(
+        tRent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,12 +85,19 @@ public class adminReport extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(tMostRent);
+        jScrollPane2.setViewportView(tRent);
 
         bBack.setText("Back");
         bBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bBackActionPerformed(evt);
+            }
+        });
+
+        bGenerate.setText("Generate");
+        bGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGenerateActionPerformed(evt);
             }
         });
 
@@ -108,14 +116,17 @@ public class adminReport extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbSalesYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(bBack)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(bGenerate)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(bBack))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(cbRentYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cbRentMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(159, 159, 159)
@@ -137,18 +148,20 @@ public class adminReport extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbSalesYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cbRentYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbRentMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bBack)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bBack)
+                    .addComponent(bGenerate))
+                .addContainerGap())
         );
 
         cbRentYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year" }));
@@ -165,12 +178,25 @@ public class adminReport extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_bBackActionPerformed
 
+    private void bGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGenerateActionPerformed
+        generateRentReport();
+        generateSalesReport();
+    }//GEN-LAST:event_bGenerateActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
     
     //display month and year in drop down
+    public void displayButton(){
+        boolean allFilled = cbSalesYear.getSelectedIndex() != 0 &&
+                            cbRentYear.getSelectedIndex() != 0 &&
+                            cbRentMonth.getSelectedIndex() != 0;
+    
+        bGenerate.setEnabled(allFilled);
+    }
+    
     public void displayYear(){
         int currentYear = Year.now().getValue();
         for (int year = currentYear; year >= currentYear - 20; year--) {
@@ -180,91 +206,151 @@ public class adminReport extends javax.swing.JFrame {
     }
     
     private void generateSalesReport() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.setRowCount(0);
+        model.setColumnCount(0);
+        //header
+        model.addColumn("Month");
+        model.addColumn("Total Sales");
+        model.addColumn("Total Refunded Amount");
+
         String selectedYear = cbSalesYear.getSelectedItem().toString();
-        DefaultTableModel model = (DefaultTableModel) tSales.getModel();
-        model.setRowCount(0); // Clear the table
 
-        // Initialize variables to store total sales and refunded amount for each month
-        double[] totalSales = new double[13]; // Index 0 is unused
-        double[] totalRefund = new double[13];
+        //HashMap to store month-wise sales and refund amounts
+        HashMap<String, Double> salesByMonth = new HashMap<>();
+        HashMap<String, Double> refundByMonth = new HashMap<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("booking.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("booking.txt"))) {
             String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                String[] startDate = data[2].split("-");
-                String[] endDate = data[3].split("-");
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split(",");
+                String rStatus = record[6];
+                if (rStatus.equals("COMPLETED") || rStatus.equals("REFUNDED")) {
+                    String rStartDate = record[2];
+                    String[] startDateParts = rStartDate.split("-");
+                    String monthKey = startDateParts[1] + "-" + startDateParts[0]; 
 
-                // Check if booking is within selected year
-                if (startDate[0].equals(selectedYear) || endDate[0].equals(selectedYear)) {
-                    int startMonth = Integer.parseInt(startDate[1]);
-                    int endMonth = Integer.parseInt(endDate[1]);
-                    double amount = Double.parseDouble(data[5]);
-
-                    // Calculate refunded amount (if status is "REFUNDED")
-                    if (data[6].equals("REFUNDED")) {
-                        amount *= 0.2; // Refund 80%
-                        for (int i = startMonth; i <= endMonth; i++) {
-                            totalRefund[i] += amount;
+                    //check if the booking is in the selected year
+                    if (startDateParts[0].equals(selectedYear)) {
+                        double rPayAmount = Double.parseDouble(record[5]);
+                        double rRefundAmount;
+                        if (rStatus.equals("REFUNDED")) {
+                            rRefundAmount = rPayAmount * 0.25;
+                        } else {
+                            rRefundAmount = 0;
                         }
-                    }
 
-                    // Add to total sales for each month
-                    for (int i = startMonth; i <= endMonth; i++) {
-                        totalSales[i] += amount;
+                        //update sales and refund amounts for the month
+                        salesByMonth.put(monthKey, salesByMonth.getOrDefault(monthKey, 0.00) + rPayAmount);
+                        refundByMonth.put(monthKey, refundByMonth.getOrDefault(monthKey, 0.00) + rRefundAmount);
                     }
                 }
             }
+            
+            String[] monthNames = {"", "January", "February", "March", "April", "May", "June", "July", 
+                                   "August", "September", "October", "November", "December"};
 
-            // Display total sales and refunded amount for each month in the table
+            //iterate over the HashMap and add month-wise totals to the model
             for (int i = 1; i <= 12; i++) {
-                model.addRow(new Object[]{months[i], totalSales[i], totalRefund[i]});
+                String monthName = monthNames[i];
+                String monthKey = String.format("%02d", i) + "-" + selectedYear; // Adjusted month-year format
+
+                if (salesByMonth.containsKey(monthKey) && refundByMonth.containsKey(monthKey)) {
+                    double totalSales = salesByMonth.get(monthKey);
+                    double totalRefund = refundByMonth.get(monthKey);
+                    model.addRow(new Object[]{monthName, "RM" + totalSales, "RM" + totalRefund});
+                } else {
+                    //if no records for month
+                    model.addRow(new Object[]{monthName, "RM -", "RM -"});
+                }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //set the model to the table
+        tSales.setModel(model);
     }
 
     private void generateRentReport() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.setRowCount(0);
+        model.setColumnCount(0);
+        //header
+        model.addColumn("Car ID");
+        model.addColumn("Car Name");
+        model.addColumn("Car Type");
+        model.addColumn("Car Rate");
+        model.addColumn("Rentals");
+        model.addColumn("Cancellations");
+
         String selectedYear = cbRentYear.getSelectedItem().toString();
-        String selectedMonth = cbMonth.getSelectedItem().toString();
-        DefaultTableModel model = (DefaultTableModel) tMostRent.getModel();
-        model.setRowCount(0); // Clear the table
+        String selectedMonth = cbRentMonth.getSelectedItem().toString();
+        String selectedMonthNumber = ""; // Initialize the selected month number
 
-        // Initialize variables to store rented car count for each car
-        int[] rentedCarCount = new int[5]; // Assuming there are 5 cars
+        // Convert month name to number
+        String[] monthNames = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        for (int i = 0; i < 12; i++) {
+            if (monthNames[i].equalsIgnoreCase(selectedMonth)) {
+                selectedMonthNumber = String.format("%02d", i+1);
+                break;
+            }
+        }
 
-        try (BufferedReader br = new BufferedReader(new FileReader("booking.txt"))) {
+        //HashMap to store car-wise rentals and cancellations
+        HashMap<String, Integer> rentalsByCar = new HashMap<>();
+        HashMap<String, Integer> cancellationsByCar = new HashMap<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("booking.txt"))) {
             String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                String[] startDate = data[2].split("-");
-
-                // Check if booking is within selected year and month
-                if (startDate[0].equals(selectedYear) && startDate[1].equals(selectedMonth)) {
-                    // Increment count for the rented car
-                    int carId = Integer.parseInt(data[1]);
-                    rentedCarCount[carId - 1]++; // Assuming car IDs start from 1
+            while ((line = reader.readLine()) != null) {
+                String[] record = line.split(",");
+                String rCarID = record[1];
+                String rStatus = record[6];
+                if (rStatus.equals("COMPLETED") || rStatus.equals("REFUNDED")) {
+                    String rStartDate = record[2];
+                    String[] startDateParts = rStartDate.split("-");
+                    if (startDateParts[0].equals(selectedYear) && startDateParts[1].equals(selectedMonthNumber)) {
+                        if (rStatus.equals("COMPLETED")) {
+                            rentalsByCar.put(rCarID, rentalsByCar.getOrDefault(rCarID, 0) + 1);
+                        } else if (rStatus.equals("REFUNDED")) {
+                            cancellationsByCar.put(rCarID, cancellationsByCar.getOrDefault(rCarID, 0) + 1);
+                        }
+                    }
+                }
+            }
+            
+            List<String> allCarIDs = new ArrayList<>();
+            try (BufferedReader carReader = new BufferedReader(new FileReader("car.txt"))) {
+                String carLine;
+                while ((carLine = carReader.readLine()) != null) {
+                    String[] carRecord = carLine.split(",");
+                    allCarIDs.add(carRecord[0]);
                 }
             }
 
-            // Find the most rented car
-            int maxCount = 0;
-            int mostRentedCarId = -1;
-            for (int i = 0; i < rentedCarCount.length; i++) {
-                if (rentedCarCount[i] > maxCount) {
-                    maxCount = rentedCarCount[i];
-                    mostRentedCarId = i + 1; // Adjusting car ID (1-indexed)
-                }
-            }
+            // Iterate over the rented cars and add to the table
+            for (String carID: allCarIDs) {
+                int rentals = rentalsByCar.getOrDefault(carID, 0);
+                int cancellations = cancellationsByCar.getOrDefault(carID, 0);
+                Car car = new Car();
+                String[] carDetails = car.getCarDetails(carID);
 
-            // Display the most rented car in the table
-            if (mostRentedCarId != -1) {
-                model.addRow(new Object[]{mostRentedCarId, maxCount});
+                if (carDetails != null) {
+                    if (rentals == 0 && cancellations == 0) {
+                        model.addRow(new Object[]{carID, carDetails[0], carDetails[1], "RM" + carDetails[2], 0, 0});
+                    } else {
+                        model.addRow(new Object[]{carID, carDetails[0], carDetails[1], "RM" + carDetails[2], rentals, cancellations});
+                    }
+                } 
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Set the model to the table
+        tRent.setModel(model);
     }
     
     public static void main(String args[]) {
@@ -301,7 +387,8 @@ public class adminReport extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bBack;
-    private javax.swing.JComboBox<String> cbMonth;
+    private javax.swing.JButton bGenerate;
+    private javax.swing.JComboBox<String> cbRentMonth;
     private javax.swing.JComboBox<String> cbRentYear;
     private javax.swing.JComboBox<String> cbSalesYear;
     private javax.swing.JLabel jLabel1;
@@ -310,7 +397,7 @@ public class adminReport extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tMostRent;
+    private javax.swing.JTable tRent;
     private javax.swing.JTable tSales;
     // End of variables declaration//GEN-END:variables
 }
