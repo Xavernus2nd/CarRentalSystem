@@ -34,6 +34,8 @@ public class adminManageBooking extends javax.swing.JFrame {
         populateTable();
         addTableListener();
         bAction.setVisible(false);
+        lcancel.setVisible(false);
+        lreason.setVisible(false);
     }
 
     /**
@@ -68,10 +70,10 @@ public class adminManageBooking extends javax.swing.JFrame {
         sCarName = new javax.swing.JLabel();
         sCarType = new javax.swing.JLabel();
         sBookingStatus = new javax.swing.JLabel();
-        bCancelled = new javax.swing.JRadioButton();
-        bComplete = new javax.swing.JRadioButton();
+        bPendRefund = new javax.swing.JRadioButton();
+        bPendReturn = new javax.swing.JRadioButton();
         jLabel19 = new javax.swing.JLabel();
-        bDone = new javax.swing.JRadioButton();
+        bCompleted = new javax.swing.JRadioButton();
         bAll = new javax.swing.JRadioButton();
         tMessage = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -79,6 +81,10 @@ public class adminManageBooking extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         cUniqueID = new javax.swing.JComboBox<>();
         bRefunded = new javax.swing.JRadioButton();
+        lcancel = new javax.swing.JLabel();
+        lreason = new javax.swing.JLabel();
+        bPendConfirm = new javax.swing.JRadioButton();
+        bConfirmed = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,29 +151,29 @@ public class adminManageBooking extends javax.swing.JFrame {
 
         sBookingStatus.setText("-");
 
-        buttonGroup1.add(bCancelled);
-        bCancelled.setText("Pending Refund");
-        bCancelled.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(bPendRefund);
+        bPendRefund.setText("Pending Refund");
+        bPendRefund.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCancelledActionPerformed(evt);
+                bPendRefundActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(bComplete);
-        bComplete.setText("Pending Return");
-        bComplete.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(bPendReturn);
+        bPendReturn.setText("Pending Return");
+        bPendReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCompleteActionPerformed(evt);
+                bPendReturnActionPerformed(evt);
             }
         });
 
         jLabel19.setText("View:");
 
-        buttonGroup1.add(bDone);
-        bDone.setText("Completed");
-        bDone.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(bCompleted);
+        bCompleted.setText("Completed");
+        bCompleted.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bDoneActionPerformed(evt);
+                bCompletedActionPerformed(evt);
             }
         });
 
@@ -193,11 +199,6 @@ public class adminManageBooking extends javax.swing.JFrame {
         jLabel12.setText("by");
 
         cUniqueID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Booking ID", "Username" }));
-        cUniqueID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cUniqueIDActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(bRefunded);
         bRefunded.setText("Refunded");
@@ -207,19 +208,39 @@ public class adminManageBooking extends javax.swing.JFrame {
             }
         });
 
+        lcancel.setText("Cancel Reason:");
+
+        lreason.setText("-");
+
+        buttonGroup1.add(bPendConfirm);
+        bPendConfirm.setText("Pending Confirmation");
+        bPendConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPendConfirmActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(bConfirmed);
+        bConfirmed.setText("Confirmed");
+        bConfirmed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfirmedActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sBookingStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(sBookingStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -227,10 +248,10 @@ public class adminManageBooking extends javax.swing.JFrame {
                                     .addComponent(jLabel5))
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sBookID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sCarName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(sBookID, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sCarName, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(sCarType, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(153, 153, 153)
+                        .addGap(328, 328, 328)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8)
@@ -238,46 +259,54 @@ public class adminManageBooking extends javax.swing.JFrame {
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sStartDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(sEndDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(sPayAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sStartDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sEndDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sPayAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(bAction)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bBack))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(bAll)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bCancelled)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bComplete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bDone, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tMessage, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bRefunded, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cUniqueID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
+                    .addComponent(tMessage)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bAll)
+                            .addGap(7, 7, 7)
+                            .addComponent(bPendConfirm)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bPendReturn)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bPendRefund)
+                            .addGap(8, 8, 8)
+                            .addComponent(bConfirmed)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bCompleted)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bRefunded)
+                            .addGap(24, 24, 24)
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cUniqueID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(bAction)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bBack)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(346, 346, 346)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel2)))))
-                .addContainerGap(9, Short.MAX_VALUE))
+                        .addComponent(lcancel, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lreason, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel2)))
+                .addGap(417, 417, 417))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,19 +315,21 @@ public class adminManageBooking extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bCancelled)
-                    .addComponent(bComplete)
+                    .addComponent(bPendRefund)
+                    .addComponent(bPendReturn)
                     .addComponent(jLabel19)
-                    .addComponent(bDone)
+                    .addComponent(bCompleted)
                     .addComponent(bAll)
                     .addComponent(jLabel11)
                     .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(cUniqueID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bRefunded))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(bRefunded)
+                    .addComponent(bPendConfirm)
+                    .addComponent(bConfirmed))
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tMessage)
@@ -336,11 +367,15 @@ public class adminManageBooking extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(sPayAmount))))
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lcancel)
+                    .addComponent(lreason))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bBack)
                     .addComponent(bAction))
-                .addGap(16, 16, 16))
+                .addGap(44, 44, 44))
         );
 
         getContentPane().add(tfSearch);
@@ -348,32 +383,34 @@ public class adminManageBooking extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bCancelledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelledActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "You are viewing bookings cancelled by customers.");
+    private void bPendRefundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPendRefundActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "You are viewing bookings pending refund.");
         bAction.setText("Refund");
         bAction.setVisible(true);
-        bComplete.setSelected(false);
-        bDone.setSelected(false);
         bAll.setSelected(false);
+        bPendConfirm.setSelected(false);
+        bPendReturn.setSelected(false);
+        bConfirmed.setSelected(false);
+        bCompleted.setSelected(false);
         bRefunded.setSelected(false);
         populateTable();
-    }//GEN-LAST:event_bCancelledActionPerformed
+    }//GEN-LAST:event_bPendRefundActionPerformed
 
-    private void bCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCompleteActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "You are viewing bookings paid.");
+    private void bPendReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPendReturnActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "You are viewing bookings pending car return.");
         bAction.setText("Complete");
         bAction.setVisible(true);
-        bCancelled.setSelected(false);
-        bComplete.setSelected(false);
         bAll.setSelected(false);
+        bPendConfirm.setSelected(false);
+        bPendRefund.setSelected(false);
+        bConfirmed.setSelected(false);
+        bCompleted.setSelected(false);
         bRefunded.setSelected(false);
         populateTable();
-    }//GEN-LAST:event_bCompleteActionPerformed
+    }//GEN-LAST:event_bPendReturnActionPerformed
 
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         String searchQuery = tfSearch.getText();
-        System.out.println("Search Query: " + searchQuery);
-        System.out.println("Selected Item: " + cUniqueID.getSelectedItem());
 
         if (!searchQuery.isEmpty()) {
             RowFilter<TableModel, Object> rf = null;
@@ -393,54 +430,82 @@ public class adminManageBooking extends javax.swing.JFrame {
     private void bAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAllActionPerformed
         JOptionPane.showMessageDialog(rootPane, "You are viewing all bookings.");    
         bAction.setVisible(false);
-        bCancelled.setSelected(false);
-        bComplete.setSelected(false);
-        bDone.setSelected(false);
+        bPendConfirm.setSelected(false);
+        bPendReturn.setSelected(false);
+        bPendRefund.setSelected(false);
+        bConfirmed.setSelected(false);
+        bCompleted.setSelected(false);
         bRefunded.setSelected(false);
         populateTable();
     }//GEN-LAST:event_bAllActionPerformed
 
-    private void bDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDoneActionPerformed
+    private void bCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCompletedActionPerformed
         JOptionPane.showMessageDialog(rootPane, "You are viewing bookings completed.");
         bAction.setVisible(false);
-        bCancelled.setSelected(false);
-        bComplete.setSelected(false);
         bAll.setSelected(false);
+        bPendConfirm.setSelected(false);
+        bPendReturn.setSelected(false);
+        bPendRefund.setSelected(false);
+        bConfirmed.setSelected(false);
+        bRefunded.setSelected(false);
         populateTable();
-    }//GEN-LAST:event_bDoneActionPerformed
+    }//GEN-LAST:event_bCompletedActionPerformed
 
     private void bRefundedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefundedActionPerformed
         JOptionPane.showMessageDialog(rootPane, "You are viewing bookings refunded.");
         bAction.setVisible(false);
-        bCancelled.setSelected(false);
-        bComplete.setSelected(false);
-        bDone.setSelected(false);
         bAll.setSelected(false);
+        bPendConfirm.setSelected(false);
+        bPendReturn.setSelected(false);
+        bPendRefund.setSelected(false);
+        bConfirmed.setSelected(false);
+        bCompleted.setSelected(false);
         populateTable();
     }//GEN-LAST:event_bRefundedActionPerformed
 
     private void bActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActionActionPerformed
-        if (bComplete.isSelected()){
+        int currentBookID = Integer.parseInt(sBookID.getText());
+        boolean approve = false;
+        Booking booking = new Booking(currentBookID);
+        Customer customer = new Customer(sUsername.getText(), "");
+        customer.setPoints();
+        if (bPendConfirm.isSelected()){ //to confirm booking
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to mark as confirmed?");
+            if (confirm == JOptionPane.YES_OPTION){
+                approve = true;
+                booking.updateStatus(currentBookID, approve);
+                JOptionPane.showMessageDialog(rootPane, "Booking marked as confirmed.");
+            }
+        } else if (bPendReturn.isSelected()){ //to mark as completed (after customer return car)
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to mark as complete?");
             if (confirm == JOptionPane.YES_OPTION){
-                int currentBookID = Integer.parseInt(sBookID.getText());
-                Booking booking = new Booking(currentBookID);
-                booking.updateStatus(currentBookID);
+                double payment = Double.parseDouble(sPayAmount.getText());
+                int earnPoints = customer.calculateEarnablePoints(payment);
+                customer.addPoints(earnPoints);
+                approve = true;
+                booking.updateStatus(currentBookID, approve);
                 JOptionPane.showMessageDialog(rootPane, "Booking marked as completed.");
             }
-        } else if (bCancelled.isSelected()){
-            int confirm = JOptionPane.showConfirmDialog(null, "Do you want to approve cancellation and proceed refund?");
-            if (confirm == JOptionPane.YES_OPTION){
-                int currentBookID = Integer.parseInt(sBookID.getText());
-                Booking booking = new Booking(currentBookID);
-                booking.updateStatus(currentBookID);
-                JOptionPane.showMessageDialog(rootPane, "Cancellation approved and refund successfully.");
-            } else if (confirm == JOptionPane.NO_OPTION){
-                int currentBookID = Integer.parseInt(sBookID.getText());
-                Booking booking = new Booking(currentBookID);
-                booking.updateStatus(currentBookID);
-                JOptionPane.showMessageDialog(rootPane, "Cancellation request denied.");
-            } 
+        } else if (bPendRefund.isSelected()){
+            int confirm;
+            if (lreason.isVisible()) { 
+                confirm = JOptionPane.showConfirmDialog(null, "Do you want to approve cancellation and proceed refund? Click Yes to approve/ No to deny request.");
+                if (confirm == JOptionPane.YES_OPTION) {
+                    approve = true;
+                    booking.updateStatus(currentBookID, approve);
+                    JOptionPane.showMessageDialog(rootPane, "Cancellation approved and refund successfully.");
+                } else if (confirm == JOptionPane.NO_OPTION) {
+                    booking.updateStatus(currentBookID , approve);
+                    JOptionPane.showMessageDialog(rootPane, "Cancellation denied");
+                }
+            } else {
+                confirm = JOptionPane.showConfirmDialog(null, "Confirm refund?");
+                if (confirm == JOptionPane.YES_OPTION){
+                    approve = true;
+                    booking.updateStatus(currentBookID, approve);
+                    JOptionPane.showMessageDialog(rootPane, "Cancellation request denied.");
+                }
+            }
         }
         populateTable(); //refresh table
     }//GEN-LAST:event_bActionActionPerformed
@@ -451,9 +516,30 @@ public class adminManageBooking extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_bBackActionPerformed
 
-    private void cUniqueIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cUniqueIDActionPerformed
-        
-    }//GEN-LAST:event_cUniqueIDActionPerformed
+    private void bPendConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPendConfirmActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "You are bookings pending confirmation.");
+        bAction.setText("Confirm");
+        bAction.setVisible(true);
+        bAll.setSelected(false);
+        bPendReturn.setSelected(false);
+        bPendRefund.setSelected(false);
+        bConfirmed.setSelected(false);
+        bCompleted.setSelected(false);
+        bRefunded.setSelected(false);
+        populateTable();
+    }//GEN-LAST:event_bPendConfirmActionPerformed
+
+    private void bConfirmedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmedActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "You are bookings confirmed.");
+        bAction.setVisible(false);
+        bAll.setSelected(false);
+        bPendReturn.setSelected(false);
+        bPendRefund.setSelected(false);
+        bPendConfirm.setSelected(false);
+        bCompleted.setSelected(false);
+        bRefunded.setSelected(false);
+        populateTable();
+    }//GEN-LAST:event_bConfirmedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,6 +570,26 @@ public class adminManageBooking extends javax.swing.JFrame {
                         String endDate = (String) tBooking.getValueAt(selectedRow, 5);
                         String payAmount = (String) tBooking.getValueAt(selectedRow, 6);
                         String bookStatus = (String) tBooking.getValueAt(selectedRow, 7);
+                        String cancelReason = "";
+                        
+                        //get cancel reason
+                        try (BufferedReader reader = new BufferedReader(new FileReader("booking.txt"))) {
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                                String[] record = line.split(",");
+                                if (record[0].equals(bookingID)) { 
+                                    if ("null".equals(record[8])){
+                                        cancelReason = null;
+                                    } else {
+                                        cancelReason = record[8];
+                                    }
+                                    break;
+                                }
+                            }
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        
                         //set the data to text fields
                         sBookID.setText(bookingID);
                         sUsername.setText(username);
@@ -493,6 +599,16 @@ public class adminManageBooking extends javax.swing.JFrame {
                         sEndDate.setText(endDate);
                         sPayAmount.setText(payAmount);
                         sBookingStatus.setText(bookStatus);
+                        
+                        //show or hide the cancellation reason label
+                        if (cancelReason != null) {
+                            lreason.setText(cancelReason);
+                            lcancel.setVisible(true);
+                            lreason.setVisible(true);
+                        } else {
+                            lcancel.setVisible(false);
+                            lreason.setVisible(false);
+                        }
                     }
                 }
             }
@@ -533,13 +649,16 @@ public class adminManageBooking extends javax.swing.JFrame {
                 if (bAll.isSelected()) {
                     //add the booking details to the model
                     model.addRow(new Object[]{rBookingID, rUser, carDetails[0], carDetails[1], rStartDate, rEndDate, "RM" + rPayAmount, rBookingStatus});
-                } else if (bComplete.isSelected() && rBookingStatus.equals("PAID")) {
+                } else if (bPendConfirm.isSelected() && rBookingStatus.equals("PAID")) {
                     //add the booking details to the model
                     model.addRow(new Object[]{rBookingID, rUser, carDetails[0], carDetails[1], rStartDate, rEndDate, "RM" + rPayAmount, rBookingStatus});
-                } else if (bCancelled.isSelected() && rBookingStatus.equals("CANCELLED")) {
+                } else if (bPendReturn.isSelected() && rBookingStatus.equals("CONFIRMED")) {
                     //add the booking details to the model
                     model.addRow(new Object[]{rBookingID, rUser, carDetails[0], carDetails[1], rStartDate, rEndDate, "RM" + rPayAmount, rBookingStatus});
-                } else if (bDone.isSelected() && rBookingStatus.equals("COMPLETED")) {
+                } else if (bPendRefund.isSelected() && (rBookingStatus.equals("CANCELLED") || rBookingStatus.equals("PENDING CANCEL"))) {
+                    //add the booking details to the model
+                    model.addRow(new Object[]{rBookingID, rUser, carDetails[0], carDetails[1], rStartDate, rEndDate, "RM" + rPayAmount, rBookingStatus});
+                } else if (bCompleted.isSelected() && rBookingStatus.equals("COMPLETED")) {
                     //add the booking details to the model
                     model.addRow(new Object[]{rBookingID, rUser, carDetails[0], carDetails[1], rStartDate, rEndDate, "RM" + rPayAmount, rBookingStatus});
                 } else if (bRefunded.isSelected() && rBookingStatus.equals("REFUNDED")) {
@@ -591,9 +710,11 @@ public class adminManageBooking extends javax.swing.JFrame {
     private javax.swing.JButton bAction;
     private javax.swing.JRadioButton bAll;
     private javax.swing.JButton bBack;
-    private javax.swing.JRadioButton bCancelled;
-    private javax.swing.JRadioButton bComplete;
-    private javax.swing.JRadioButton bDone;
+    private javax.swing.JRadioButton bCompleted;
+    private javax.swing.JRadioButton bConfirmed;
+    private javax.swing.JRadioButton bPendConfirm;
+    private javax.swing.JRadioButton bPendRefund;
+    private javax.swing.JRadioButton bPendReturn;
     private javax.swing.JRadioButton bRefunded;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cUniqueID;
@@ -611,6 +732,8 @@ public class adminManageBooking extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lcancel;
+    private javax.swing.JLabel lreason;
     private javax.swing.JLabel sBookID;
     private javax.swing.JLabel sBookingStatus;
     private javax.swing.JLabel sCarName;
