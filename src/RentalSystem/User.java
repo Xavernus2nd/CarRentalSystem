@@ -32,6 +32,10 @@ public class User {
         this.password = password;
     }
     
+    public User(String username){ //for customer set point
+        this.username = username;
+    }
+    
     public User(String username, String password, String userType){
         this.username = username;
         this.password = password;
@@ -232,6 +236,11 @@ class Customer extends User{
     public Customer(String username, String password){
         super(username, password);
         this.userType = "customer";
+    }
+    
+    public Customer(String username){ //for set points
+        super(username);
+        this.userType = "customer";
         try{
             BufferedReader br = new BufferedReader(new FileReader("user.txt"));
             String line;
@@ -246,6 +255,7 @@ class Customer extends User{
             e.printStackTrace();
         }
     }
+    
     public void addPoints(int add){
         this.points += add;
         try{
