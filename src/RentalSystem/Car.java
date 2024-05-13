@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -190,16 +189,15 @@ public class Car {
 }
     //show car details
     public String[] getCarDetails(String carID) throws IOException {
-            try (BufferedReader reader = new BufferedReader(new FileReader("car.txt"))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(",");
-                    if (parts[0].equals(carID)) {
-                        return new String[]{parts[1], parts[2]}; //car name and type
-                    }
+        try (BufferedReader reader = new BufferedReader(new FileReader("car.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[0].equals(carID)) {
+                    return new String[]{parts[1], parts[2], parts[3]}; //car name and type
                 }
             }
-            return new String[]{"", ""}; //default if car ID is not found
         }
-
+        return new String[]{"", "", ""}; //default if car ID is not found
+    }
 }
