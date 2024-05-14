@@ -26,6 +26,7 @@ public class adminManageBooking extends javax.swing.JFrame {
      * Creates new form adminManageBooking
      */
     private TableRowSorter<TableModel> sorter;
+    private int carID;
 
     public adminManageBooking() {
         initComponents();
@@ -475,9 +476,10 @@ public class adminManageBooking extends javax.swing.JFrame {
         }
         
         int currentBookID = Integer.parseInt(sBookID.getText());
+        int carID = 1;
         boolean approve = false;
         Booking booking = new Booking(currentBookID);
-        Customer customer = new Customer(sUsername.getText(), "");
+        Customer customer = new Customer(sUsername.getText());
         if (bPendConfirm.isSelected()){ //to confirm booking
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to mark as confirmed?");
             if (confirm == JOptionPane.YES_OPTION){
@@ -488,11 +490,19 @@ public class adminManageBooking extends javax.swing.JFrame {
         } else if (bPendReturn.isSelected()){ //to mark as completed (after customer return car)
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to mark as complete?");
             if (confirm == JOptionPane.YES_OPTION){
+                //validate if the user can get reward points
                 String paymentString = sPayAmount.getText();
                 String amountString = paymentString.substring(2); //remove RM
-                double payment = Double.parseDouble(amountString);
-                int earnPoints = customer.calculateEarnablePoints(payment);
-                customer.addPoints(earnPoints);
+                double payment = Double.parseDouble(amountString); //actual payment paid by the customer
+                
+                Booking calBooking = new Booking(currentBookID, carID, sStartDate.getText() , sEndDate.getText());
+                double paymentTotal = calBooking.calculatePaymentTotal(); //payment if no redeem points
+                
+                if (payment == paymentTotal){
+                    int earnPoints = customer.calculateEarnablePoints(payment);
+                    customer.addPoints(earnPoints);
+                }
+                
                 approve = true;
                 booking.updateStatus(currentBookID, approve);
                 JOptionPane.showMessageDialog(rootPane, "Booking marked as completed.");
@@ -665,6 +675,8 @@ public class adminManageBooking extends javax.swing.JFrame {
                 String rPayAmount = record[5];
                 String rBookingStatus = record[6];
                 String rUser = record[7];
+                
+                this.carID = Integer.parseInt(rCarID);
 
                 //get car details based on car ID
                 Car car = new Car();
