@@ -147,7 +147,7 @@ public class User {
         }
 
         //check if the password meets the length requirement
-        if (checkPassword.length() < 5 && checkPassword.length() > 9) {
+        if (checkPassword.length() < 5 || checkPassword.length() > 8) {  
             return false;
         }
 
@@ -155,27 +155,22 @@ public class User {
         if (!checkPassword.equals(confirmPassword)) {
             return false;
         }
-        
-        if (isHPNumICNumValid(hpNum, icNum)){
+
+        //check if the phone number and IC number are valid
+        if (!isHPNumICNumValid(hpNum, icNum)) {
             return false;
         }
-
-        //all validations passed
+        
         return true;
     }
 
     private boolean isOldEnough(String icNum) {
-        //get the current year
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-
-        //extract the birth year from the IC number
         int birthYear = Integer.parseInt(icNum.substring(0, 2));
-
-        //calculate the actual birth year
-        if (birthYear >= 0 && birthYear <= 21) {
-            birthYear += 2000; // Assume 21st century
+        if (birthYear >= 0 && birthYear <= 24) { 
+            birthYear += 2000; //21st century
         } else {
-            birthYear += 1900; // Assume 20th century
+            birthYear += 1900; //20th century
         }
 
         //calculate the age
@@ -186,37 +181,32 @@ public class User {
     }
 
     private boolean isUsernameUnique(String checkUsername) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("user.txt"));
+        try (BufferedReader br = new BufferedReader(new FileReader("user.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] record = line.split(",");
                 String rUsername = record[0];
                 if (checkUsername.equals(rUsername)) {
-                    //username is not unique
                     return false;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return true;
+            return false; 
         }
         return true;
     }
-    
-    private boolean isHPNumICNumValid(String hpNum, String ICNum) {
+
+    private boolean isHPNumICNumValid(String hpNum, String icNum) {
         int lenHP = hpNum.length();
-        int lenIC = ICNum.length();
-        if (lenHP != 10 && lenHP != 11 && lenIC != 12){
-            return false;
-        }
-        return true;
+        int lenIC = icNum.length();
+        return (lenHP == 10 || lenHP == 11) && lenIC == 12;
     }
     
     public void regRegistration() {
         String record = username + "," + password + "," + icnum + "," + hpnum + ",customer,0";
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt", true))) {
-            bw.write("\n" + record);
+            bw.write(record + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
