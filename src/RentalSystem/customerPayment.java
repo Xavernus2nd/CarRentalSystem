@@ -477,7 +477,7 @@ public class customerPayment extends javax.swing.JFrame {
 
                         JOptionPane.showMessageDialog(rootPane, "Payment successful.");
                         dispose();
-                        customerViewBooking frame = new customerViewBooking();
+                        customerReceipt frame = new customerReceipt(bookingID);
                         frame.setVisible(true);
                         return; 
                     }
