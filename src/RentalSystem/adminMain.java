@@ -30,7 +30,8 @@ public class adminMain extends javax.swing.JFrame {
         bAddCar = new javax.swing.JButton();
         bExit = new javax.swing.JButton();
         bManageCar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        bManageBooking = new javax.swing.JButton();
+        bReport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,10 +60,17 @@ public class adminMain extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Manage Booking");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bManageBooking.setText("Manage Booking");
+        bManageBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bManageBookingActionPerformed(evt);
+            }
+        });
+
+        bReport.setText("View Report");
+        bReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bReportActionPerformed(evt);
             }
         });
 
@@ -81,7 +89,8 @@ public class adminMain extends javax.swing.JFrame {
                             .addComponent(bAddCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bManageCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(bManageBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -94,10 +103,12 @@ public class adminMain extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(bManageCar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(26, 26, 26)
+                .addComponent(bManageBooking)
+                .addGap(16, 16, 16)
+                .addComponent(bReport)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bExit)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,11 +134,17 @@ public class adminMain extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_bManageCarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bManageBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bManageBookingActionPerformed
         dispose();
         adminManageBooking frame = new adminManageBooking();
         frame.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bManageBookingActionPerformed
+
+    private void bReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bReportActionPerformed
+        dispose();
+        adminReport frame = new adminReport();
+        frame.setVisible(true);
+    }//GEN-LAST:event_bReportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,8 +184,9 @@ public class adminMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAddCar;
     private javax.swing.JButton bExit;
+    private javax.swing.JButton bManageBooking;
     private javax.swing.JButton bManageCar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bReport;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
