@@ -128,7 +128,7 @@ public class Car {
         if((carName.matches("\\d+"))){
             throw new NumberFormatException();
         }
-        carTypes cartype = carTypes.valueOf(carType); //for enum
+        String formattedRate = String.format("%.2f", carRate);
         //fetching latest carID from file
         int lastID = 0;
         try{
@@ -144,7 +144,7 @@ public class Car {
             e.printStackTrace();
         }
         //Writing to file
-        String newLine = lastID + "," + carName + "," + carType + "," + carRate + ","+ "Not Deleted";
+        String newLine = lastID + "," + carName + "," + carType + "," + formattedRate + ","+ "Not Deleted";
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter("car.txt", true));
             bw.write(newLine + "\n");

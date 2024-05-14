@@ -224,12 +224,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Start Date:"/>
+        <Property name="text" type="java.lang.String" value="Start Date (YYYY-MM-DD):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="End Date:"/>
+        <Property name="text" type="java.lang.String" value="End Date (YYYY-MM-DD):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfStartDate">

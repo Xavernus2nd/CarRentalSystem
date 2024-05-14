@@ -158,9 +158,9 @@ public class customerCarBooking extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Start Date:");
+        jLabel4.setText("Start Date (YYYY-MM-DD):");
 
-        jLabel5.setText("End Date:");
+        jLabel5.setText("End Date (YYYY-MM-DD):");
 
         tfStartDate.setEditable(false);
         tfStartDate.setEnabled(false);
