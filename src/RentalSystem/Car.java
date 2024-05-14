@@ -161,6 +161,7 @@ public class Car {
             if((carName.matches("\\d+"))){
                 throw new NumberFormatException();
             }
+            String formattedRate = String.format("%.2f", carRate);
             //Writing to file
             BufferedReader br = new BufferedReader(new FileReader("car.txt"));
             StringBuffer buffer = new StringBuffer();
@@ -169,7 +170,7 @@ public class Car {
                 String record[] = line.split(",");
                 int checkCarID = Integer.parseInt(record[0]);
                 if (checkCarID == carID){
-                    line = record[0] + "," + carName + ","+ carType + ","+ carRate + ","+ deletionStatus;
+                    line = record[0] + "," + carName + ","+ carType + ","+ formattedRate + ","+ deletionStatus;
                 }
                 String bufferLine = line + "\n";
                 buffer.append(bufferLine);

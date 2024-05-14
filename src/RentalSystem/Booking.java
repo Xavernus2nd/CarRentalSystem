@@ -241,6 +241,7 @@ public class Booking {
     
     public void initialBooking(){
         int lastID = 0;
+        String formattedTotal = String.format("%.2f", paymentTotal);
         try{
             BufferedReader br = new BufferedReader(new FileReader("booking.txt"));
             String line;
@@ -254,7 +255,7 @@ public class Booking {
             e.printStackTrace();
         }
         //Writing to file
-        String newLine = lastID + "," + carID + "," + bStartDate + "," + bEndDate + ",," + paymentTotal +",PROCESSING PAYMENT,"+username+",null";
+        String newLine = lastID + "," + carID + "," + bStartDate + "," + bEndDate + ",," + formattedTotal +",PROCESSING PAYMENT,"+username+",null";
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter("booking.txt", true));
             bw.write(newLine + "\n");
