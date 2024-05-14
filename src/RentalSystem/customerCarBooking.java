@@ -38,7 +38,7 @@ public class customerCarBooking extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tCar.getModel();
         model.setRowCount(0);
         model.setColumnCount(0); //to clear previous table model
-        String[] columnHeaders = {"CarID", "Car Name", "Car Type", "Car Rate (per Dar)", "Availability"};
+        String[] columnHeaders = {"CarID", "Car Name", "Car Type", "Car Rate (per Day)", "Availability"};
         model.setColumnIdentifiers(columnHeaders);
         try {
         BufferedReader carBr = new BufferedReader(new FileReader("car.txt"));
@@ -58,15 +58,15 @@ public class customerCarBooking extends javax.swing.JFrame {
             String rCarAvailability = car.checkAvail();
             if (bAll.isSelected()) {
                 //adds all cars to table
-                String[] row = {rCarID, rCarName, rCarType, rCarRate, rCarAvailability};
+                String[] row = {rCarID, rCarName, rCarType, "RM"+rCarRate, rCarAvailability};
                 model.addRow(row);
             } else if (bAvailable.isSelected() && rCarAvailability.equals("Available")) {
                 //adds only available cars
-                String[] row = {rCarID, rCarName, rCarType, rCarRate, rCarAvailability};
+                String[] row = {rCarID, rCarName, rCarType, "RM"+rCarRate, rCarAvailability};
                 model.addRow(row);
             } else if (bNotAvailable.isSelected() && rCarAvailability.equals("Not Available")) {
                 //adds only unavailable cars
-                String[] row = {rCarID, rCarName, rCarType, rCarRate, rCarAvailability};
+                String[] row = {rCarID, rCarName, rCarType, "RM"+rCarRate, rCarAvailability};
                 model.addRow(row);
             } 
             if(rCarAvailability.equals("Available")){

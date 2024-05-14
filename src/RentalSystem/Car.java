@@ -102,22 +102,18 @@ public class Car {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String currentDate = format.format(calendar.getTime());
         String avail = "Available";
+        if(deletionStatus.equals("Deleted")){
+            return "Deleted";
+        }
         try (BufferedReader br = new BufferedReader(new FileReader("booking.txt"))) {
             String line;
             while((line = br.readLine()) != null){
                 String record[] = line.split(",");
-                if(deletionStatus.equals("Deleted")){
-                    avail = "Deleted";
-                    break;
-                }
                 //checks for validity of date for records of specified carID
-                else if((record[1].equals(String.valueOf(carID))) && (currentDate.compareTo(record[3]))<=0 && (currentDate.compareTo(record[2]))>=0){
-                    if(record[6].equals("CANCELLED")){
-                        avail = "Available";
-                        break;
+                if((record[1].equals(String.valueOf(carID))) && (currentDate.compareTo(record[3])<=0) && (currentDate.compareTo(record[2])>=0)){
+                    if(!record[6].equals("CANCELLED")){
+                        avail = "Not Available";
                     }
-                    avail = "Not Available";
-                    break;
                 }
             }
         } 
