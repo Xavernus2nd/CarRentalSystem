@@ -156,7 +156,7 @@ public class User {
             return false;
         }
         
-        if (!isHPNumICNumValid(hpNum, icNum)){
+        if (isHPNumICNumValid(hpNum, icNum)){
             return false;
         }
 
@@ -210,7 +210,6 @@ public class User {
         if (lenHP != 10 && lenHP != 11 && lenIC != 12){
             return false;
         }
-        
         return true;
     }
     
