@@ -487,9 +487,7 @@ public class customerPayment extends javax.swing.JFrame {
             } catch (IOException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(rootPane, "An error occurred while saving payment details.");
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(rootPane, "Please enter a valid CVV.");
-            }
+            } 
         } else {
             //CVV or card number is invalid, show error message
             JOptionPane.showMessageDialog(rootPane, "Please enter a valid card number and CVV.");
