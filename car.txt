@@ -1,4 +1,4 @@
-1,Toyota Corolla,Sedan,50.0,Not Deleted
-2,Honda City,Hatchback,75.0,Not Deleted
-3,Toyota Camry,Sedan,50.0,Deleted
-4,Honda HRV,SUV,80.0,Not Deleted
+1,Toyota Corolla,Sedan,50.00,Not Deleted
+2,Honda City,Hatchback,75.00,Not Deleted
+3,Toyota Camry,Sedan,50.00,Deleted
+4,Honda HRV,SUV,80.00,Not Deleted
