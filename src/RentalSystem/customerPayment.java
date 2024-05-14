@@ -456,8 +456,8 @@ public class customerPayment extends javax.swing.JFrame {
                         double paymentTotal = Double.parseDouble(tokens[5]);
 
                         //check if points redemption is within the valid range
-                        int redeemPoints = (int) tfRedeemPoints.getValue();
-                        int currentPoints = Integer.parseInt(sPointBalance.getText());
+                        int redeemPoints = (int) tfRedeemPoints.getValue(); //user want redeem
+                        int currentPoints = Integer.parseInt(sPointBalance.getText()); //user current point balance
 
                         if (redeemPoints > currentPoints) {
                             JOptionPane.showMessageDialog(rootPane, "Points to redeem exceeds current balance.");
@@ -469,7 +469,7 @@ public class customerPayment extends javax.swing.JFrame {
 
                         double newPaymentTotal = paymentTotal - redeemPoints; 
                         
-                        Customer customer = new Customer(UserSession.getUsername(), "");
+                        Customer customer = new Customer(UserSession.getUsername());
                         customer.deductPoints(redeemPoints);
 
                         Booking booking = new Booking(bookingID, carID, startDate, endDate);
