@@ -299,7 +299,7 @@ public class Booking {
     }
 
     public double calculatePaymentTotal() {
-        double total = 0.0; 
+        double total = 0.00; 
         try {
             double rate = getCarRateFromID(carID);
             Date startDate = parseDate(bStartDate);
