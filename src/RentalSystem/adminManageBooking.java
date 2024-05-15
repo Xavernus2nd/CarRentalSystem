@@ -385,7 +385,6 @@ public class adminManageBooking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bPendRefundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPendRefundActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "You are viewing bookings pending refund.");
         bAction.setText("Refund");
         bAction.setVisible(true);
         bAll.setSelected(false);
@@ -398,7 +397,6 @@ public class adminManageBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_bPendRefundActionPerformed
 
     private void bPendReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPendReturnActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "You are viewing bookings pending car return.");
         bAction.setText("Complete");
         bAction.setVisible(true);
         bAll.setSelected(false);
@@ -429,7 +427,6 @@ public class adminManageBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_tfSearchActionPerformed
 
     private void bAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAllActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "You are viewing all bookings.");    
         bAction.setVisible(false);
         bPendConfirm.setSelected(false);
         bPendReturn.setSelected(false);
@@ -442,7 +439,6 @@ public class adminManageBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_bAllActionPerformed
 
     private void bCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCompletedActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "You are viewing bookings completed.");
         bAction.setVisible(false);
         bAll.setSelected(false);
         bPendConfirm.setSelected(false);
@@ -455,7 +451,6 @@ public class adminManageBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_bCompletedActionPerformed
 
     private void bRefundedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefundedActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "You are viewing bookings refunded.");
         bAction.setVisible(false);
         bAll.setSelected(false);
         bPendConfirm.setSelected(false);
@@ -538,7 +533,6 @@ public class adminManageBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_bBackActionPerformed
 
     private void bPendConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPendConfirmActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "You are bookings pending confirmation.");
         bAction.setText("Confirm");
         bAction.setVisible(true);
         bAll.setSelected(false);
@@ -552,7 +546,6 @@ public class adminManageBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_bPendConfirmActionPerformed
 
     private void bConfirmedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmedActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "You are bookings confirmed.");
         bAction.setVisible(false);
         bAll.setSelected(false);
         bPendReturn.setSelected(false);
