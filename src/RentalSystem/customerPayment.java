@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -443,32 +444,47 @@ public class customerPayment extends javax.swing.JFrame {
 
         //validate CVV and card number length
         if (validateCardNum(cardNum) && validateCvv(cvv)) {
+            Calendar today = Calendar.getInstance();
+            int expMonth = Integer.parseInt(month);
+            int expYear = Integer.parseInt(year);
+
+            Calendar expiryDate = Calendar.getInstance();
+            expiryDate.set(expYear, expMonth - 1, expiryDate.getActualMaximum(Calendar.DAY_OF_MONTH));
+            
+            //if card expiry date is earlier than the current month of the year
+            if (expiryDate.before(today)) {
+                JOptionPane.showMessageDialog(rootPane, "The card has expired. Please try again.");
+                return;
+            }
+
             try (BufferedReader br = new BufferedReader(new FileReader("booking.txt"))) {
                 String line;
                 while ((line = br.readLine()) != null) {
                     String[] tokens = line.split(",");
                     int bookingID = Integer.parseInt(tokens[0]);
 
-                    if (bookingID == Integer.parseInt(sBookingID.getText())) { //check if the retrieved booking ID matches the one displayed
+                    if (bookingID == Integer.parseInt(sBookingID.getText())) { 
                         int carID = Integer.parseInt(tokens[1]);
                         String startDate = tokens[2];
                         String endDate = tokens[3];
                         double paymentTotal = Double.parseDouble(tokens[5]);
 
                         //check if points redemption is within the valid range
-                        int redeemPoints = (int) tfRedeemPoints.getValue(); //user want redeem
-                        int currentPoints = Integer.parseInt(sPointBalance.getText()); //user current point balance
+                        int redeemPoints = (int) tfRedeemPoints.getValue(); //user wants to redeem
+                        int currentPoints = Integer.parseInt(sPointBalance.getText()); //user's current point balance
 
                         if (redeemPoints > currentPoints) {
                             JOptionPane.showMessageDialog(rootPane, "Points to redeem exceeds current balance.");
                             return; 
                         } else if (redeemPoints < 0) {
-                            JOptionPane.showMessageDialog(rootPane, "Points to redeem exceeds is negative.");
+                            JOptionPane.showMessageDialog(rootPane, "Points to redeem cannot be negative.");
                             return;
                         }
 
-                        double newPaymentTotal = paymentTotal - redeemPoints; 
-                        
+                        double newPayTotalOneDec = paymentTotal - redeemPoints; 
+                        String newPaymentTotalString = String.format("%.2f", newPayTotalOneDec);
+                        double newPaymentTotal = Double.parseDouble(newPaymentTotalString);
+
                         Customer customer = new Customer(UserSession.getUsername());
                         customer.deductPoints(redeemPoints);
 
@@ -482,15 +498,13 @@ public class customerPayment extends javax.swing.JFrame {
                         return; 
                     }
                 }
-                //if no matching booking is found
                 JOptionPane.showMessageDialog(rootPane, "No matching booking found.");
             } catch (IOException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(rootPane, "An error occurred while saving payment details.");
             } 
         } else {
-            //CVV or card number is invalid, show error message
-            JOptionPane.showMessageDialog(rootPane, "Please enter a valid card number and CVV.");
+            JOptionPane.showMessageDialog(rootPane, "Please enter a valid card number or CVV.");
         }
     }//GEN-LAST:event_bPayActionPerformed
 
@@ -516,10 +530,11 @@ public class customerPayment extends javax.swing.JFrame {
                 String carID = tokens[1];
                 String startDate = tokens[2];
                 String endDate = tokens[3];
-                double paymentTotal = Double.parseDouble(tokens[5]);
+                double paymentTotalDouble = Double.parseDouble(tokens[5]);
+                String paymentTotal = String.format("%.2f", paymentTotalDouble);
                 Customer customer = new Customer(UserSession.getUsername());
                 int pointBalance = customer.getPoints();
-                int earnablePoints = customer.calculateEarnablePoints(paymentTotal);
+                int earnablePoints = customer.calculateEarnablePoints(paymentTotalDouble);
                 displayCarDetails(carID);
                 //display
                 sBookingID.setText(String.valueOf(bookingID));
@@ -543,7 +558,7 @@ public class customerPayment extends javax.swing.JFrame {
             //display car details
             sCarName.setText(carDetails[0]);
             sCarType.setText(carDetails[1]);
-            sCarRate.setText(carDetails[2]);
+            sCarRate.setText("RM "+carDetails[2]);
         } catch (IOException e) {
             e.printStackTrace();
         }
