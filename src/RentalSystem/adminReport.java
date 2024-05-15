@@ -24,7 +24,7 @@ public class adminReport extends javax.swing.JFrame {
     public adminReport() {
         initComponents();
         displayYear();
-        //displayButton();
+        displayButton();
     }
 
     /**
@@ -62,9 +62,26 @@ public class adminReport extends javax.swing.JFrame {
         jLabel3.setText("Sales Statistic for year:");
 
         cbRentMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
+        cbRentMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRentMonthActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Most Rented Car in:");
+
+        cbRentYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRentYearActionPerformed(evt);
+            }
+        });
+
+        cbSalesYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSalesYearActionPerformed(evt);
+            }
+        });
 
         tSales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,7 +191,7 @@ public class adminReport extends javax.swing.JFrame {
 
     private void bBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackActionPerformed
         dispose();
-        customerMain frame = new customerMain();
+        adminMain frame = new adminMain();
         frame.setVisible(true);
     }//GEN-LAST:event_bBackActionPerformed
 
@@ -183,18 +200,27 @@ public class adminReport extends javax.swing.JFrame {
         generateSalesReport();
     }//GEN-LAST:event_bGenerateActionPerformed
 
+    private void cbSalesYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSalesYearActionPerformed
+        displayButton();
+    }//GEN-LAST:event_cbSalesYearActionPerformed
+
+    private void cbRentYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRentYearActionPerformed
+        displayButton();
+    }//GEN-LAST:event_cbRentYearActionPerformed
+
+    private void cbRentMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRentMonthActionPerformed
+        displayButton();
+    }//GEN-LAST:event_cbRentMonthActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    
-    
-    //display month and year in drop down
+    //check if all fields are filled in
     public void displayButton(){
-        boolean allFilled = cbSalesYear.getSelectedIndex() != 0 &&
-                            cbRentYear.getSelectedIndex() != 0 &&
-                            cbRentMonth.getSelectedIndex() != 0;
-    
-        bGenerate.setEnabled(allFilled);
+        boolean allSelected = !cbSalesYear.getSelectedItem().equals("Year") &&
+                              !cbRentYear.getSelectedItem().equals("Year") &&
+                              !cbRentMonth.getSelectedItem().equals("Month");
+        bGenerate.setEnabled(allSelected);
     }
     
     public void displayYear(){
@@ -230,12 +256,12 @@ public class adminReport extends javax.swing.JFrame {
                     String[] startDateParts = rStartDate.split("-");
                     String monthKey = startDateParts[1] + "-" + startDateParts[0];
 
-                    // Check if the booking is in the selected year
+                    //check if the booking is in the selected year
                     if (startDateParts[0].equals(selectedYear)) {
                         double rPayAmount = Double.parseDouble(record[5]);
                         double rRefundAmount = 0;
 
-                        // Update sales and refund amounts for the month
+                        //update sales and refund amounts for the month
                         if (rStatus.equals("COMPLETED")) {
                             salesByMonth.put(monthKey, salesByMonth.getOrDefault(monthKey, 0.00) + rPayAmount);
                         } else if (rStatus.equals("REFUNDED")) {
@@ -249,14 +275,16 @@ public class adminReport extends javax.swing.JFrame {
             String[] monthNames = {"", "January", "February", "March", "April", "May", "June", "July", 
                                    "August", "September", "October", "November", "December"};
 
-            // Iterate over the HashMap and add month-wise totals to the model
+            //iterate over the HashMap and add month-wise totals to the model
             for (int i = 1; i <= 12; i++) {
                 String monthName = monthNames[i];
                 String monthKey = String.format("%02d", i) + "-" + selectedYear; // Adjusted month-year format
 
                 if (salesByMonth.containsKey(monthKey)) {
-                    double totalSales = salesByMonth.get(monthKey);
-                    double totalRefund = refundByMonth.getOrDefault(monthKey, 0.00);
+                    double totalSalesDouble = salesByMonth.get(monthKey);
+                    double totalRefundDouble = refundByMonth.getOrDefault(monthKey, 0.0);
+                    String totalSales = String.format("%.2f", totalSalesDouble);
+                    String totalRefund = String.format("%.2f", totalRefundDouble);
                     model.addRow(new Object[]{monthName, "RM" + totalSales, "RM" + totalRefund});
                 } else {
                     // If no records for month
