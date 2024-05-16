@@ -53,7 +53,7 @@ public class adminReport extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Car Rental System");
+        jLabel1.setText("17 Car Rental System");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("View Report");
@@ -69,7 +69,7 @@ public class adminReport extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Most Rented Car in:");
+        jLabel4.setText("Car Rental Statistic in:");
 
         cbRentYear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +104,8 @@ public class adminReport extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tRent);
 
+        bBack.setBackground(new java.awt.Color(255, 51, 102));
+        bBack.setForeground(new java.awt.Color(255, 255, 255));
         bBack.setText("Back");
         bBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
