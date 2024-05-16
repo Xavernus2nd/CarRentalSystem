@@ -29,7 +29,6 @@ public class customerMain extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         bBookCar = new javax.swing.JButton();
         bBookingHistory = new javax.swing.JButton();
-        bManageAccount = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         bExit = new javax.swing.JButton();
 
@@ -52,8 +51,6 @@ public class customerMain extends javax.swing.JFrame {
                 bBookingHistoryActionPerformed(evt);
             }
         });
-
-        bManageAccount.setText("Manage Account");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Actions:");
@@ -81,8 +78,7 @@ public class customerMain extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(137, 137, 137)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bBookingHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bManageAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bBookingHistory, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .addComponent(bBookCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
@@ -102,10 +98,8 @@ public class customerMain extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(bBookingHistory)
                 .addGap(18, 18, 18)
-                .addComponent(bManageAccount)
-                .addGap(18, 18, 18)
                 .addComponent(bExit)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,7 +165,6 @@ public class customerMain extends javax.swing.JFrame {
     private javax.swing.JButton bBookCar;
     private javax.swing.JButton bBookingHistory;
     private javax.swing.JButton bExit;
-    private javax.swing.JButton bManageAccount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
