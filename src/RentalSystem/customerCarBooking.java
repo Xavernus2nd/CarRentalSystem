@@ -38,7 +38,7 @@ public class customerCarBooking extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tCar.getModel();
         model.setRowCount(0);
         model.setColumnCount(0); //to clear previous table model
-        String[] columnHeaders = {"CarID", "Car Name", "Car Type", "Car Rate (per Day)", "Availability"};
+        String[] columnHeaders = {"CarID", "Car Name", "Car Type", "Car Rate (per Day)", "Availability (For today)"};
         model.setColumnIdentifiers(columnHeaders);
         try {
         BufferedReader carBr = new BufferedReader(new FileReader("car.txt"));
@@ -69,9 +69,8 @@ public class customerCarBooking extends javax.swing.JFrame {
                 String[] row = {rCarID, rCarName, rCarType, "RM"+rCarRate, rCarAvailability};
                 model.addRow(row);
             } 
-            if(rCarAvailability.equals("Available")){
-                cbCar.addItem(rCarID);
-            }
+            cbCar.addItem(rCarID);
+            
         }
         
         }

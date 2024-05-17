@@ -32,13 +32,11 @@
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                          <Component id="tfManageCarID" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="tfManageCarName" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Component id="tfManageCarID" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="tfManageCarName" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                                   <Component id="tfManageCarRate" max="32767" attributes="0"/>
                                   <Component id="cbCarType" max="32767" attributes="0"/>
                                   <Component id="cbDeletion" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
