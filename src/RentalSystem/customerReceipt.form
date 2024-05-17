@@ -39,62 +39,65 @@
                                   <Component id="jLabel8" min="-2" pref="62" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel14" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel11" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                                  <Component id="jLabel15" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="sUsername" min="-2" pref="86" max="-2" attributes="0"/>
-                                  <Component id="sHPNum" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
-                                  <Component id="sCurDate" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
-                                  <Component id="sBookID" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel9" min="-2" pref="61" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="sCarName" max="32767" attributes="0"/>
-                                  <Component id="sCarID" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="sCarType" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                      <Component id="jLabel12" min="-2" pref="108" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel13" min="-2" pref="86" max="-2" attributes="0"/>
-                                          <Component id="jLabel10" max="32767" attributes="0"/>
-                                          <Component id="jLabel16" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel14" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel11" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+                                          <Component id="jLabel15" min="-2" pref="115" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="sUsername" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Component id="sHPNum" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Component id="sCurDate" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Component id="sBookID" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel9" min="-2" pref="61" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="sCarName" max="32767" attributes="0"/>
+                                          <Component id="sCarID" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="sCarType" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                              <Component id="jLabel12" min="-2" pref="108" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jLabel13" min="-2" pref="86" max="-2" attributes="0"/>
+                                                  <Component id="jLabel10" max="32767" attributes="0"/>
+                                                  <Component id="jLabel16" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="sRedeemedPoint" max="32767" attributes="0"/>
+                                          <Component id="sSubTotal" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="sCarRate" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="sPayTotal" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="sRedeemedPoint" max="32767" attributes="0"/>
-                                  <Component id="sSubTotal" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="sCarRate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="sPayTotal" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="sStartDate" max="32767" attributes="0"/>
-                          <Component id="sEndDate" min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="sStartDate" pref="93" max="32767" attributes="0"/>
+                          <Component id="sEndDate" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
