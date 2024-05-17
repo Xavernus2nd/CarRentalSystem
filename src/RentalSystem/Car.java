@@ -158,7 +158,7 @@ public class Car {
     public void editCar(){
         try{
             //checking for string validity
-            if((carName.matches("\\d+"))){
+            if((carName.matches("\\d+")) || carName.equals("")){
                 throw new NumberFormatException();
             }
             String formattedRate = String.format("%.2f", carRate);
