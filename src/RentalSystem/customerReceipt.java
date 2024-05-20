@@ -326,15 +326,17 @@ public class customerReceipt extends javax.swing.JFrame {
                     String startDate = tokens[2];
                     String endDate = tokens[3];
                     double paymentTotal = Double.parseDouble(tokens[5]);
+                    String formattedPayTotal = String.format("%.2f", paymentTotal);
                     String username = tokens[7];
                     
                     //payment info
                     Booking booking = new Booking(bookingID, Integer.parseInt(carID), startDate, endDate);
                     double subTotal = booking.calculatePaymentTotal();
+                    String formattedSubTotal = String.format("%.2f", subTotal);
                     double pointsRedeemInDouble = subTotal - paymentTotal;
                     int pointsRedeem = (int) pointsRedeemInDouble;
                     
-                    return new String[]{carID, startDate, endDate, String.valueOf(paymentTotal), username, String.valueOf(subTotal), String.valueOf(pointsRedeem)};
+                    return new String[]{carID, startDate, endDate, formattedPayTotal, username, formattedSubTotal, String.valueOf(pointsRedeem)};
                 }
             }
         } catch (IOException e) {
@@ -354,7 +356,8 @@ public class customerReceipt extends javax.swing.JFrame {
                     String carName = tokens[1];
                     String carType = tokens[2];
                     double carRate = Double.parseDouble(tokens[3]);
-                    return new String[]{carName, carType, String.valueOf(carRate)};
+                    String formattedCarRate = String.format("%.2f", carRate);
+                    return new String[]{carName, carType, formattedCarRate};
                 }
             }
         } catch (IOException e) {
