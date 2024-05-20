@@ -485,9 +485,7 @@ public class customerPayment extends javax.swing.JFrame {
                             return;
                         }
 
-                        double newPayTotalOneDec = paymentTotal - redeemPoints; 
-                        String newPaymentTotalString = String.format("%.2f", newPayTotalOneDec);
-                        double newPaymentTotal = Double.parseDouble(newPaymentTotalString);
+                        double newPaymentTotal = paymentTotal - redeemPoints; 
 
                         Customer customer = new Customer(UserSession.getUsername());
                         customer.deductPoints(redeemPoints);
