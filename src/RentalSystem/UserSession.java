@@ -27,6 +27,4 @@ public class UserSession {
     public static String getUserType() {
         return userType;
     }
-    
-    
 }
