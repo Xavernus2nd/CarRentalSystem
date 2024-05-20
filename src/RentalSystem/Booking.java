@@ -313,6 +313,7 @@ public class Booking {
     }
     
     public void writeBookingDetails(String cardNumber, double paymentTotal, int bookingID) {
+        String formattedTotal = String.format("%.2f", paymentTotal);
         try {
             File file = new File("booking.txt");
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -326,7 +327,7 @@ public class Booking {
                     String maskedCardNumber = maskCardNumber(cardNumber);
                     //update booking & payment details
                     bookingData[4] = maskedCardNumber;
-                    bookingData[5] = String.valueOf(paymentTotal);
+                    bookingData[5] = String.valueOf(formattedTotal);
                     bookingData[6] = "PAID";
                     line = String.join(",", bookingData);
                 }
