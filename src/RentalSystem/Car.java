@@ -91,11 +91,11 @@ public class Car {
     }
     
     public enum carTypes{
-    Sedan,
-    Hatchback,
-    SUV,
-    MPV
-}
+        Sedan,
+        Hatchback,
+        SUV,
+        MPV
+    }
     
     public String checkAvail(){ //checks for car availability from deletion status and booking file
         Calendar calendar = new GregorianCalendar();
