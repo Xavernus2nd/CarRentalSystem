@@ -101,7 +101,7 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lcancel" min="-2" pref="88" max="-2" attributes="0"/>
+                      <Component id="lcancel" min="-2" pref="94" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lreason" min="-2" pref="502" max="-2" attributes="0"/>
                   </Group>
